@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/App';
-import './main.scss';
-
-/**
- * ReactDOM.render: Renders App to index html file
- */
-ReactDOM.render(<App />, document.querySelector('#root'));
+import App from './App';
+import './assets/main.scss';
+import './assets/simple-grid.css'
+ReactDOM.render(<StrictMode><App /></StrictMode>, document.querySelector('#root'));
