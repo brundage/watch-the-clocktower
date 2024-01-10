@@ -1,6 +1,10 @@
 import React, { StrictMode, useRef, useState } from 'react';
+
 import troubleBrewing from './data/trouble_brewing'
 import defaultPlayers from './data/default_players'
+
+import useLocalStorage from './util/use_local_storage';
+
 import CommandLine  from './components/CommandLine'
 import HistoryPanel from './components/HistoryPanel'
 import PlayersPanel from './components/PlayersPanel'
@@ -11,9 +15,9 @@ const App = () => {
     "dateFormat": { "hour": "numeric", "minute": "numeric", "second": "numeric" },
     "locale": navigator.language
   })
-  const [ history, setHistory ] = useState([])
-  const [ players, setPlayers ] = useState(defaultPlayers)
-  const [ script, setScript ] = useState(troubleBrewing)
+  const [ history, setHistory ] = useLocalStorage("history", [])
+  const [ players, setPlayers ] = useLocalStorage("players", defaultPlayers)
+  const [ script, setScript ] = useLocalStorage("script", troubleBrewing)
 
   function appendHistory(message) {
     setHistory([...history, { "entry": message,
