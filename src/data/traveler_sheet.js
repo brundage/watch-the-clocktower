@@ -1,4 +1,4 @@
-export const travelerSheet = [
+const travelerSheet = [
     null, // 0 players
     null, // 1 player
     null, // 2 players
@@ -101,3 +101,5 @@ export const travelerSheet = [
       "demons": 1
     },
 ]
+
+export default travelerSheet

@@ -1,4 +1,4 @@
-export const troubleBrewing = [
+const troubleBrewing = [
     {
         "id": "_meta",
         "name": "Trouble Brewing",
@@ -317,3 +317,5 @@ export const troubleBrewing = [
         "SAOpos": 6
     }
 ]
+
+export default troubleBrewing

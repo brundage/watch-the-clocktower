@@ -1,1 +1,28 @@
-
+.townsfolk {
+    color: blue;
+  }
+  .outsider {
+    color: lightskyblue;
+  }
+  .minion {
+    color: lightcoral;
+  }
+  .demon {
+    color: red;
+  }
+  .scriptMeta {
+    font-size: 80%;
+  }
+  .autocompletePanel {
+    z-index: 100;
+    position: absolute;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  #command-line {
+    width: 100%;
+  }
+  li.selected {
+    font-weight: bold;
+  }
