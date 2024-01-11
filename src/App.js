@@ -9,10 +9,7 @@ import PlayersPanel from './components/PlayersPanel'
 import { PlayersProvider } from './components/PlayersProvider';
 import ScriptPanel  from './components/ScriptPanel'
 import { ScriptProvider } from './components/ScriptProvider';
-
-
-// https://react.dev/learn/scaling-up-with-reducer-and-context
-
+import { ConfirmDialogProvider } from './components/ConfirmDialog';
 
 const App = () => {
   const [ formatting, setFormatting ] = useState({
@@ -30,10 +27,13 @@ const App = () => {
     <HistoryProvider><PlayersProvider><ScriptProvider>
     <div className="container">
       <div className="row">
+        <ConfirmDialogProvider>
         <div className="col-4"><HistoryPanel formatting={formatting} /></div>
+        </ConfirmDialogProvider>
         <div className="col-4"><PlayersPanel /></div>
         <div className="col-4"><ScriptPanel /></div>
       </div>
+      <hr />
       <div className="row"><CommandLine /></div>
       <div className="row">
       </div>

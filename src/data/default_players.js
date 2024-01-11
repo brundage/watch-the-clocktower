@@ -1,5 +1,5 @@
 export const defaultPlayers = [
-    "storyteller",
+    "The Storyteller",
     "Occam Blazer",
     "seat 2",
     "seat 3",

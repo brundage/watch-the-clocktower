@@ -16,6 +16,8 @@
   .autocompletePanel {
     z-index: 100;
     position: absolute;
+    bottom: 50px;
+
   }
   ol, ul {
     list-style: none;
@@ -25,4 +27,16 @@
   }
   li.selected {
     font-weight: bold;
+  }
+
+  .confirmation-dialog, .centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .confirmation-dialog {
+    font-weight: bold;
+    background: red;
   }

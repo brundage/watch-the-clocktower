@@ -4,22 +4,24 @@ import { badMoonRising } from "../scripts/bad_moon_rising"
 import { troubleBrewing } from "../scripts/trouble_brewing"
 
 export default function ScriptPanel() {
-    const selected = { "townsfolk": true,
-                       "outsider": true,
-                       "minion": true,
-                       "demon": true,
-                       "fabled": false,
-                       "traveler": false
-                     }
-    const teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled" ]
-    const sortOrder = "alpha"
     const script = useScript()
-    const dispatch = useScriptDispatch()
   
     if( script.length == 0 ) {
       script = ["No script loaded"]
     }
   
+    const dispatch = useScriptDispatch()
+    const meta = script.find( (entry) => entry.id === "_meta" )
+    const selected = { "townsfolk": true,
+    "outsider": true,
+    "minion": true,
+    "demon": true,
+    "fabled": false,
+    "traveler": false
+  }
+  const sortOrder = "alpha"
+  const teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled" ]
+
     function rejector(thing) {
       if( thing.id === "_meta" )  {
         return false;
@@ -47,8 +49,6 @@ export default function ScriptPanel() {
       return(<li key={entry.id} className={entry.team}>{entry.name}</li>);
     }
   
-    const meta = script.find( (entry) => entry.id === "_meta" )
-    
     return (<>
       <h1>Script</h1>
       <p className="scriptMeta">
