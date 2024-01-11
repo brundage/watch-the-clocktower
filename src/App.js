@@ -1,17 +1,15 @@
 import React, { createContext, StrictMode, useContext, useRef, useState } from 'react';
 
-import troubleBrewing from './data/trouble_brewing'
-import defaultPlayers from './data/default_players'
-
 import useLocalStorage from './util/use_local_storage';
 
 import CommandLine  from './components/CommandLine'
 import HistoryPanel from './components/HistoryPanel'
 import PlayersPanel from './components/PlayersPanel'
+import { PlayersProvider } from './components/PlayersProvider';
 import ScriptPanel  from './components/ScriptPanel'
+import { ScriptProvider } from './components/ScriptProvider';
 
 
-const ScriptContext = createContext(troubleBrewing)
 // https://react.dev/learn/scaling-up-with-reducer-and-context
 
 
@@ -21,8 +19,6 @@ const App = () => {
     "locale": navigator.language
   })
   const [ history, setHistory ] = useLocalStorage("history", [])
-  const [ players, setPlayers ] = useLocalStorage("players", defaultPlayers)
-  const [ script,  setScript  ] = useLocalStorage("script",  troubleBrewing)
 
   function appendHistory(message) {
     setHistory([...history, { "entry": message,
@@ -34,11 +30,20 @@ const App = () => {
     <div className="container">
       <div className="row">
         <div className="col-4"><HistoryPanel history={history} formatting={formatting} /></div>
-        <div className="col-4"><PlayersPanel players={players} /></div>
-        <div className="col-4"><ScriptPanel script={script} /></div>
+        <PlayersProvider>
+          <div className="col-4"><PlayersPanel /></div>
+        </PlayersProvider>
+        <ScriptProvider>
+          <div className="col-4"><ScriptPanel /></div>
+        </ScriptProvider>
       </div>
+        <ScriptProvider>
+          <PlayersProvider>
+            <div className="row"><CommandLine appendHistory={appendHistory} /></div>
+          </PlayersProvider>
+          </ScriptProvider>
       <div className="row">
-        <CommandLine appendHistory={appendHistory} players={players} script={script.flatMap((entry) => (entry.id))} />
+
       </div>
   </div>
   )

@@ -1,6 +1,9 @@
 import React from 'react'
+import { useScript, useScriptDispatch } from "./ScriptProvider"
+import { badMoonRising } from "../scripts/bad_moon_rising"
+import { troubleBrewing } from "../scripts/trouble_brewing"
 
-export default function ScriptPanel({script}) {
+export default function ScriptPanel() {
     const selected = { "townsfolk": true,
                        "outsider": true,
                        "minion": true,
@@ -10,6 +13,8 @@ export default function ScriptPanel({script}) {
                      }
     const teams = [ "townsfolk", "outsider", "minion", "demon", "traveller", "fabled" ]
     const sortOrder = "alpha"
+    const script = useScript()
+    const dispatch = useScriptDispatch()
   
     if( script.length == 0 ) {
       script = ["No script loaded"]
@@ -52,6 +57,12 @@ export default function ScriptPanel({script}) {
       <ul>
         { script.filter(rejector).sort(sorter).map(display) }
       </ul>
+      <button onClick={() => { dispatch({type: 'changed', id: badMoonRising}) }}>
+        Change to BMR
+      </button>
+      <button onClick={() => { dispatch({type: 'changed', id: troubleBrewing}) }}>
+        Change to TB
+      </button>
       </>
     );
   }

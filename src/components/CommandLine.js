@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react'
 import AutocompletePanel from './AutocompletePanel'
+import { useScript } from './ScriptProvider'
+import { usePlayers } from './PlayersProvider'
 
-export default function CommandLine({appendHistory, players, script}) {
+export default function CommandLine({appendHistory}) {
 
   const [ autocompleteCandidates, setAutocompleteCandidates ] = useState([])
   const [ autocompleteIndex, setAutocompleteIndex ] = useState()
   const inputEl = useRef(null)
+  const players = usePlayers()
+  const script = useScript()
   const [ searchList, setSearchList ] = useState([])
   const [ searchKey, setSearchKey ] = useState("")
 
@@ -33,6 +37,7 @@ export default function CommandLine({appendHistory, players, script}) {
     if( searching() ) {
       const search = str.slice(startPos(),endPos()).toLowerCase()
       if( search.length > 0 ) {
+        // const list = searchList.filter((item) => item.id.toLowerCase().startsWith(search)).map((item) => item.id)
         const list = searchList.filter((item) => item.toLowerCase().startsWith(search))
         setAutocompleteCandidates(list)
         setAutocompleteIndex(0)

@@ -1,6 +1,8 @@
 import React from 'react'
+import { usePlayers } from './PlayersProvider';
 
-export default function PlayersPanel({players}) {
+export default function PlayersPanel() {
+  const players = usePlayers()
     function display(player) {
       return(<li key={player}>{player}</li>);
     }
