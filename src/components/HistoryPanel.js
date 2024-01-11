@@ -1,6 +1,8 @@
 import React from 'react'
+import { useHistory } from './HistoryProvider'
 
-export default function HistoryPanel({history, formatting}) {
+export default function HistoryPanel({formatting}) {
+    const history = useHistory()
 
     function display(entry) {
       return( <li key={entry.id}>
@@ -12,6 +14,7 @@ export default function HistoryPanel({history, formatting}) {
       return a.id - b.id
     }
   
+    console.log(history)
     return(
       <>
       <h1>History</h1>

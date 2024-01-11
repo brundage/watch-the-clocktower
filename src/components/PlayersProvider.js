@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { defaultPlayers as initialPlayers } from '../data/default_players'
 
-
 const PlayersContext = createContext(null)
 const PlayersDispatchContext = createContext(null)
 const localStorageKey = "players"

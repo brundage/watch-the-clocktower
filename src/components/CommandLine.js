@@ -2,11 +2,13 @@ import React, { useRef, useState } from 'react'
 import AutocompletePanel from './AutocompletePanel'
 import { useScript } from './ScriptProvider'
 import { usePlayers } from './PlayersProvider'
+import { useHistoryDispatch } from './HistoryProvider'
 
-export default function CommandLine({appendHistory}) {
+export default function CommandLine() {
 
   const [ autocompleteCandidates, setAutocompleteCandidates ] = useState([])
   const [ autocompleteIndex, setAutocompleteIndex ] = useState()
+  const historyDispatch = useHistoryDispatch()
   const inputEl = useRef(null)
   const players = usePlayers()
   const script = useScript()
@@ -73,11 +75,13 @@ export default function CommandLine({appendHistory}) {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e,historyDispatch) => {
     e.preventDefault()
     const tgt = e.target[0]
     if( tgt.value.length > 0 ) {
-      appendHistory(tgt.value)
+      historyDispatch({ type: "append",
+                        message: tgt.value
+                     })
       tgt.value = ""
     }
   }
@@ -113,7 +117,7 @@ export default function CommandLine({appendHistory}) {
   }
 
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => { handleSubmit(e,historyDispatch)}}>
       <AutocompletePanel entries={autocompleteCandidates} selected={autocompleteIndex} onItemSelected={onItemSelected} />
         <input autoFocus={true}
                id="command-line"

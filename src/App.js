@@ -4,6 +4,7 @@ import useLocalStorage from './util/use_local_storage';
 
 import CommandLine  from './components/CommandLine'
 import HistoryPanel from './components/HistoryPanel'
+import { HistoryProvider } from './components/HistoryProvider';
 import PlayersPanel from './components/PlayersPanel'
 import { PlayersProvider } from './components/PlayersProvider';
 import ScriptPanel  from './components/ScriptPanel'
@@ -18,7 +19,6 @@ const App = () => {
     "dateFormat": { "hour": "numeric", "minute": "numeric", "second": "numeric" },
     "locale": navigator.language
   })
-  const [ history, setHistory ] = useLocalStorage("history", [])
 
   function appendHistory(message) {
     setHistory([...history, { "entry": message,
@@ -27,25 +27,18 @@ const App = () => {
   }
 
   return(
+    <HistoryProvider><PlayersProvider><ScriptProvider>
     <div className="container">
       <div className="row">
-        <div className="col-4"><HistoryPanel history={history} formatting={formatting} /></div>
-        <PlayersProvider>
-          <div className="col-4"><PlayersPanel /></div>
-        </PlayersProvider>
-        <ScriptProvider>
-          <div className="col-4"><ScriptPanel /></div>
-        </ScriptProvider>
+        <div className="col-4"><HistoryPanel formatting={formatting} /></div>
+        <div className="col-4"><PlayersPanel /></div>
+        <div className="col-4"><ScriptPanel /></div>
       </div>
-        <ScriptProvider>
-          <PlayersProvider>
-            <div className="row"><CommandLine appendHistory={appendHistory} /></div>
-          </PlayersProvider>
-          </ScriptProvider>
+      <div className="row"><CommandLine /></div>
       <div className="row">
-
       </div>
   </div>
+  </ScriptProvider></PlayersProvider></HistoryProvider>
   )
 };
 

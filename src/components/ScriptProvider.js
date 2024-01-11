@@ -47,7 +47,7 @@ function scriptReducer(script, action) {
             return action.id
         }
         default: {
-            throw Error("Unknown script action: " + action.type)
+            throw Error("Unknown " + localStorageKey + " action: " + action.type)
         }
     }
 }
