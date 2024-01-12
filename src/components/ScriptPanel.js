@@ -1,6 +1,7 @@
 import React from 'react'
 import { useScript, useScriptDispatch } from "./ScriptProvider"
 import JSONLoader from './JsonLoader'
+import Character from './Character'
 
 export default function ScriptPanel() {
   const loadedScript = useScript()
@@ -19,11 +20,8 @@ export default function ScriptPanel() {
   const sortOrder = "alpha"
   const teams = ["townsfolk", "outsider", "minion", "demon", "traveller", "fabled"]
 
-  function rejector(thing) {
-    if (thing.id === "_meta") {
-      return false;
-    }
-    return selected[thing.team]
+  function rejector(entry) {
+    return( entry.id === "_meta" ? false : selected[entry.team] )
   }
 
   function sorter(a, b) {
@@ -43,7 +41,7 @@ export default function ScriptPanel() {
   }
 
   function display(entry) {
-    return (<li key={entry.id} className={entry.team}>{entry.name}</li>);
+    return (<Character key={entry.id} character={entry} />);
   }
 
   return (<>
