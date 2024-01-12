@@ -1,9 +1,9 @@
 const travelerSheet = [
-    null, // 0 players
-    null, // 1 player
-    null, // 2 players
-    null, // 3 players
-    null, // 4 players
+    undefined, // 0 players
+    undefined, // 1 player
+    undefined, // 2 players
+    undefined, // 3 players
+    undefined, // 4 players
     // 5 players
     { "townsfolk": 3,
       "outsiders": 0,

@@ -1,7 +1,7 @@
 // https://react.dev/learn/scaling-up-with-reducer-and-context
 // https://medium.com/@williamjoshualacey/refactoring-redux-using-react-context-aa29fa16f4b7
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import { defaultPlayers as initialPlayers } from '../data/default_players'
+import initialPlayers from '../data/initial_players'
 
 const PlayersContext = createContext(null)
 const PlayersDispatchContext = createContext(null)
