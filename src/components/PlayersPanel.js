@@ -4,16 +4,22 @@ import TravellerPanel from './TravellerPanel';
 
 export default function PlayersPanel() {
   const players = usePlayers()
-  function display(player) {
-    return (<li key={player}>{player}</li>);
+
+  const display = (player) => {
+    return (<li key={player.id}>{player.display}</li>);
   }
 
-  return (<>
+
+  return (<section id="players">
     <h1>Players</h1>
     <ul>
-      {players.map(display)}
+      {players.players.map(display)}
+    </ul>
+    <h1>Storytellers</h1>
+    <ul>
+      {players.storytellers.map(display)}
     </ul>
     <TravellerPanel playerCount={players.length} />
-  </>
+  </section>
   )
 }

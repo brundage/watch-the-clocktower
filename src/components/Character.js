@@ -55,7 +55,7 @@ export default function Character({ character }) {
 
   return (
     <li onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-      <span className={character.team}>{character.name}</span> <Tooltip />
+      <span className={character.team}>{character.display}</span> <Tooltip />
     </li>
   )
 }

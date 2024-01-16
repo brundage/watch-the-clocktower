@@ -8,7 +8,6 @@ export default function ScriptPanel() {
 
   const script = loadedScript.length == 0 ? ["No script loaded"] : loadedScript
   const dispatch = useScriptDispatch()
-  const meta = script.find((entry) => entry.id === "_meta") || { }
   const selected = {
     "townsfolk": true,
     "outsider": true,
@@ -17,42 +16,45 @@ export default function ScriptPanel() {
     "fabled": false,
     "traveler": false
   }
-  const sortOrder = "alpha"
+  const sortOrder = "sao"
   const teams = ["townsfolk", "outsider", "minion", "demon", "traveller", "fabled"]
 
   function rejector(entry) {
-    return( entry.id === "_meta" ? false : selected[entry.team] )
+    return( selected[entry.team] )
   }
+
 
   function sorter(a, b) {
     let ret;
     switch (sortOrder) {
       case "alpha":
-        ret = a.name.localeCompare(b.name)
+        ret = a.display.localeCompare(b.display)
         break
       case "sao":
-        ret = a.SAOpos - b.SAOpos
+        ret = a.standardAmyPosition - b.standardAmyPosition
         break
       default:
         console.log("Unrecognized sort order ", { sortOrder }, ". Defaulting to alpha by name.")
-        ret = a.name.localeCompare(b.name)
+        ret = a.display.localeCompare(b.display)
     }
-    return teams.indexOf(a.team) - teams.indexOf(b.team) || ret || a.name > b.name
+    return teams.indexOf(a.team) - teams.indexOf(b.team) || ret || a.display > b.display
   }
+
 
   function display(entry) {
     return (<Character key={entry.id} character={entry} />);
   }
 
-  return (<>
+  
+  return (<section id="script">
     <h1>Script</h1>
     <p className="scriptMeta">
-      {meta.name && <span className="scriptName">{meta.name}</span>} by {meta.author && <span className="scriptAuthor">{meta.author}</span>}
+      {script.meta.name && <span className="scriptName">{script.meta.name}</span>} by {script.meta.author && <span className="scriptAuthor">{script.meta.author}</span>}
     </p>
     <ul>
-      {script.filter(rejector).sort(sorter).map(display)}
+      {script.characters.filter(rejector).sort(sorter).map(display)}
     </ul>
     <JSONLoader handleRead={(data) => { dispatch({type: 'loaded', loadedScript: data}) }} />
-  </>
+  </section>
   );
 }
