@@ -10,11 +10,15 @@ export default function CommandLine() {
   const script = useScript()
   const historyDispatch = useHistoryDispatch()
 
+  const autocompleteForPlayers = () => { return players.players.concat(players.storytellers) }
+  const autocompleteForScript = () => { return script.characters.map((entry) => {return {id: entry.id, display: entry.display}})}
+
+
   const handleChange = (event, newValue, newPlainTextValue, mentions) => {
-    console.log("event: ", event)
-    console.log("newValue: ", newValue)
-    console.log("newPlainTextValue: ", newPlainTextValue)
-    console.log("mentions: ", mentions)
+    console.log("event", event)
+    console.log("newValue", newValue)
+    console.log("newPlainTextValue", newPlainTextValue)
+    console.log("mentions", mentions)
     setValue(newPlainTextValue)
   }
 
@@ -30,18 +34,18 @@ export default function CommandLine() {
     }
   }
 
-  
-  return (<form onSubmit={(e) => { handleSubmit(e, historyDispatch)}}>
+
+return (<form onSubmit={(e) => { handleSubmit(e, historyDispatch)}}>
     <MentionsInput onChange={handleChange} singleLine={true} value={value} placeholder="Kill with grace, die with dignity." >
       <Mention
         appendSpaceOnAdd={true}
         trigger="@"
-         data={players.players.concat(players.storytellers)}
+         data={autocompleteForPlayers()}
       />
       <Mention
         appendSpaceOnAdd={true}
         trigger=":"
-        data={script}
+        data={autocompleteForScript()}
       />
       </MentionsInput>
       <p><strong>Value:</strong> {value}</p>
