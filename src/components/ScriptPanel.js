@@ -46,15 +46,16 @@ export default function ScriptPanel() {
   }
 
   
-  return (<section id="script">
-    <h1>Script</h1>
-    <p className="scriptMeta">
-      {script.meta.name && <span className="scriptName">{script.meta.name}</span>} by {script.meta.author && <span className="scriptAuthor">{script.meta.author}</span>}
-    </p>
-    <ul>
-      {script.characters.filter(rejector).sort(sorter).map(display)}
-    </ul>
-    <JSONLoader handleRead={(data) => { dispatch({type: 'loaded', loadedScript: data}) }} />
-  </section>
-  );
+  return(
+    <section id="script">
+      <h1>Script</h1>
+      <p className="scriptMeta">
+        {script.meta.name && <span className="scriptName">{script.meta.name}</span>} by {script.meta.author && <span className="scriptAuthor">{script.meta.author}</span>}
+      </p>
+      <ul>
+        {script.characters.filter(rejector).sort(sorter).map(display)}
+      </ul>
+      <JSONLoader handleRead={(data) => { dispatch({type: 'loaded', loadedScript: data}) }} />
+    </section>
+  )
 }

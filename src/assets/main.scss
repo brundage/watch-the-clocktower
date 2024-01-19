@@ -41,3 +41,16 @@
     font-weight: bold;
     background: red;
   }
+
+  #gamePhase li {
+    display: inline;
+    margin-right: 1em;
+  }
+
+  .capitalize {
+    text-transform: capitalize;
+  }
+
+  .currentPeriod {
+    font-weight: bold;
+  }

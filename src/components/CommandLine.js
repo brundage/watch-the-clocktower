@@ -15,10 +15,10 @@ export default function CommandLine() {
 
 
   const handleChange = (event, newValue, newPlainTextValue, mentions) => {
-    console.log("event", event)
-    console.log("newValue", newValue)
-    console.log("newPlainTextValue", newPlainTextValue)
-    console.log("mentions", mentions)
+    // console.log("event", event)
+    // console.log("newValue", newValue)
+    // console.log("newPlainTextValue", newPlainTextValue)
+    // console.log("mentions", mentions)
     setValue(newPlainTextValue)
   }
 

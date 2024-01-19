@@ -48,11 +48,9 @@ function historyReducer(history, action) {
             return [...history, { entry: action.message,
                                   id: Date.now()
                                 }]
-            break
         }
         case 'clear': {
             return []
-            break
         }
         default: {
             throw Error("Unknown " + localStorageKey + " action: " + action.type)

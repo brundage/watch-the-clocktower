@@ -15,7 +15,7 @@ export default function PlayersPanel() {
     <ul>
       {players.players.map(display)}
     </ul>
-    <h1>Storytellers</h1>
+    <h2>Storytellers</h2>
     <ul>
       {players.storytellers.map(display)}
     </ul>

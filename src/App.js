@@ -8,6 +8,17 @@ import { PlayersProvider } from './components/PlayersProvider';
 import ScriptPanel from './components/ScriptPanel'
 import { ScriptProvider } from './components/ScriptProvider';
 import { ConfirmDialogProvider } from './components/ConfirmDialog';
+import PeriodPanel from './components/PeriodPanel';
+import { PeriodProvider } from './components/PeriodProvider';
+
+/*
+  State data
+    Players
+    Script
+    Player selections
+    Player character
+    Phase
+*/
 
 const App = () => {
   const [formatting, setFormatting] = useState({
@@ -23,6 +34,7 @@ const App = () => {
   }
 
   return (<>
+      <PeriodProvider><PeriodPanel /></PeriodProvider>
       <HistoryProvider><PlayersProvider><ScriptProvider>
       <div className="container">
         <div className="row">
