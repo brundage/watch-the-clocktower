@@ -26,17 +26,12 @@ const App = () => {
     "locale": navigator.language
   })
 
-  function appendHistory(message) {
-    setHistory([...history, {
-      "entry": message,
-      "id": Date.now()
-    }])
-  }
-
   return (<>
       <PeriodProvider><HistoryProvider><PlayersProvider><ScriptProvider>
-      <PeriodPanel />
       <div className="container">
+        <div className="row">
+          <PeriodPanel />
+        </div>
         <div className="row">
           <ConfirmDialogProvider>
             <div className="col-4"><HistoryPanel formatting={formatting} /></div>

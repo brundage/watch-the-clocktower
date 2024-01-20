@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { usePlayers } from './PlayersProvider';
 import TravellerPanel from './TravellerPanel';
+import Player from './Player';
+
 
 export default function PlayersPanel() {
+  const [ editing, setEditing ] = useState(null)
   const players = usePlayers()
 
   const display = (player) => {
-    return (<li key={player.id}>{player.display}</li>);
+    return (<li onClick={() => setEditing(player.id)}
+                onKeyUp={(e) => handleKeyUp(e, player)}
+                key={player.id}>
+              <Player editing={editing === player.id} player={player} />
+            </li>);
+  }
+
+
+  const handleKeyUp = (e, player) => {
+    e.key === "Escape" && setEditing(null)
+    e.key === "Enter" && setEditing(null)
   }
 
 

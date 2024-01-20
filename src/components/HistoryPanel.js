@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory, useHistoryDispatch } from './HistoryProvider'
 import useConfirmDialog from "./ConfirmDialog"
-import Period from "../util/period"
+import HistoryEntry from './HistoryEntry'
 
 
 export default function HistoryPanel({formatting}) {
@@ -10,16 +10,14 @@ export default function HistoryPanel({formatting}) {
   const confirmClear = useConfirmDialog()
 
   function display(entry) {
-    return( <li key={entry.id}>
-              <time dateTime={entry.id}>{new Intl.DateTimeFormat(formatting.locale, formatting.dateFormat).format(entry.id)}</time> {Period.name(entry.period.current)} {entry.entry}
-            </li> )
+    return( <li key={entry.id}><HistoryEntry entry={entry} formatting={formatting} /></li> )
   }
 
   const handleClear = async () => {
     const ans = await confirmClear()
     if( ans ) { historyDispatcher({type: "clear"})}
   }
-  
+
   function sorter(a,b) {
     return a.id - b.id
   }

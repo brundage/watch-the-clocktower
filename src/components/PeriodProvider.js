@@ -47,34 +47,34 @@ function loadInitialPeriod() {
 function periodReducer(period, action) {
   switch( action.type ) {
     case 'addPeriod': {
-      return({ current: period.current + 1, display: period.current + 1 })
+      return({ ...period, current: period.current + 1, display: period.current + 1 })
     }
     case 'decrementDisplay': {
       if( period.display > 1 ) {
-        return({ current: period.current, display: period.display - 1 })
+        return({ ...period, display: period.display - 1 })
       } else {
         return period
       }
     }
 
     case 'incrementCurrent': {
-      return({ current: period.current + 1, display: period.display })
+      return({ ...period, current: period.current + 1 })
     }
 
     case 'incrementDisplay': {
       if( period.display < period.current ) {
-        return({ current: period.current, display: period.display + 1 })
+        return({ ...period, display: period.display + 1 })
       } else {
         return period
       }
     }
 
     case 'zoom': {
-      return({ current: period.current, display: action.to })
+      return({ ...period, display: action.to })
     }
 
     case 'zoomCurrent': {
-      return({ current: period.current, display: period.current })
+      return({ ...period, display: period.current })
     }
 
     default: {

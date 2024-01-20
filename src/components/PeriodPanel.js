@@ -29,7 +29,7 @@ export default function PeriodPanel() {
       <ul>
         <li key="signpost">Currently: <span onClick={decrementDisplay}>&lt;&lt;</span> <span className="capitalize" onClick={zoomCurrent}>{Period.name(period.current)}</span> <span onClick={incrementDisplay}>&gt;&gt;</span></li>
         {periods}
-        <li key="next" onClick={addPeriod}>Add</li>
+        <li key="next" onClick={addPeriod}>advance</li>
       </ul>
     </nav>
     )

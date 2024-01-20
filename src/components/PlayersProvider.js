@@ -7,49 +7,63 @@ const PlayersContext = createContext(null)
 const PlayersDispatchContext = createContext(null)
 const localStorageKey = "players"
 
-export function PlayersProvider({children}) {
-    const [ players, dispatch ] = useReducer( playersReducer, loadInitialPlayers() )
+export function PlayersProvider({ children }) {
+  const [players, dispatch] = useReducer(playersReducer, loadInitialPlayers())
 
-    if (typeof window !== "undefined") {
-      useEffect(() => {
-          localStorage.setItem(localStorageKey, JSON.stringify(players));
-        }, [players]);
-    }
+  if (typeof window !== "undefined") {
+    useEffect(() => {
+      localStorage.setItem(localStorageKey, JSON.stringify(players));
+    }, [players]);
+  }
 
-    return( 
-        <PlayersContext.Provider value={players}>
-            <PlayersDispatchContext.Provider value={dispatch}>
-                {children}
-            </PlayersDispatchContext.Provider>
-        </PlayersContext.Provider>
-    )
+  return (
+    <PlayersContext.Provider value={players}>
+      <PlayersDispatchContext.Provider value={dispatch}>
+         {children}
+       </PlayersDispatchContext.Provider>
+    </PlayersContext.Provider>
+  )
 }
 
 
 export function usePlayers() {
-    return useContext(PlayersContext)
+  return useContext(PlayersContext)
 }
 
 
 export function usePlayersDispatch() {
-    return useContext(PlayersDispatchContext)
+  return useContext(PlayersDispatchContext)
 }
 
 
 function loadInitialPlayers() {
-    const saved = localStorage.getItem(localStorageKey);
-    const initial = saved !== null ? JSON.parse(saved) : initialPlayers;
-    return initial
+  const saved = localStorage.getItem(localStorageKey);
+  const initial = saved !== null ? JSON.parse(saved) : initialPlayers;
+  return initial
 }
 
 
 function playersReducer(players, action) {
-    switch( action.type ) {
-        case 'changed': {
-            return action.id
-        }
-        default: {
-            throw Error("Unknown players action: " + action.type)
-        }
+  console.log("players:", players)
+  console.log("action: ", action)
+  switch (action.type) {
+    case 'changed': {
+      return action.id
     }
+    case "edit": {
+      return({
+        storytellers: players.storytellers,
+        players: players.players.map(player => {
+          if (player.id === action.id) {
+            return Object.assign({}, player, action.changes)
+          } else {
+            return player
+          }
+        })
+      })
+    }
+    default: {
+      throw Error("Unknown players action: " + action.type)
+    }
+  }
 }
