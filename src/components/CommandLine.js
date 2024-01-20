@@ -3,12 +3,14 @@ import { MentionsInput, Mention } from 'react-mentions'
 import { useScript } from './ScriptProvider'
 import { usePlayers } from './PlayersProvider'
 import { useHistoryDispatch } from './HistoryProvider'
+import { usePeriod } from './PeriodProvider'
 
 export default function CommandLine() {
   const [value, setValue] = useState("")
   const players = usePlayers()
   const script = useScript()
   const historyDispatch = useHistoryDispatch()
+  const period = usePeriod()
 
   const autocompleteForPlayers = () => { return players.players.concat(players.storytellers) }
   const autocompleteForScript = () => { return script.characters.map((entry) => {return {id: entry.id, display: entry.display}})}
@@ -28,7 +30,8 @@ export default function CommandLine() {
     const tgt = e.target[0]
     if( tgt.value.length > 0 ) {
       historyDispatch({ type: "append",
-                        message: tgt.value
+                        message: tgt.value,
+                        period: period
                      })
       setValue("")
     }

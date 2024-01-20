@@ -46,7 +46,8 @@ function historyReducer(history, action) {
     switch( action.type ) {
         case 'append': {
             return [...history, { entry: action.message,
-                                  id: Date.now()
+                                  id: Date.now(),
+                                  period: action.period
                                 }]
         }
         case 'clear': {

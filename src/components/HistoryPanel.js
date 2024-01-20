@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory, useHistoryDispatch } from './HistoryProvider'
 import useConfirmDialog from "./ConfirmDialog"
+import Period from "../util/period"
 
 
 export default function HistoryPanel({formatting}) {
@@ -10,7 +11,7 @@ export default function HistoryPanel({formatting}) {
 
   function display(entry) {
     return( <li key={entry.id}>
-              <time dateTime={entry.id}>{new Intl.DateTimeFormat(formatting.locale, formatting.dateFormat).format(entry.id)}</time> {entry.entry}
+              <time dateTime={entry.id}>{new Intl.DateTimeFormat(formatting.locale, formatting.dateFormat).format(entry.id)}</time> {Period.name(entry.period.current)} {entry.entry}
             </li> )
   }
 

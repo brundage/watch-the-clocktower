@@ -1,5 +1,6 @@
 import React from "react";
 import { usePeriod, usePeriodDispatch } from "./PeriodProvider";
+import Period from '../util/period'
 
 export default function PeriodPanel() {
   const dispatch = usePeriodDispatch()
@@ -11,13 +12,9 @@ export default function PeriodPanel() {
   const zoomTo           = (p) => { dispatch({type: 'zoom', to: p     }) }
   const addPeriod        = ()  => { dispatch({type: 'addPeriod'       }) }
 
-  const periodPhase = (p) => { return (p % 2 === 0 ? "day" : "night") }
-  const periodName  = (p) => { return periodPhase(p) + " " + periodNum(p) }
-  const periodNum   = (p) => { return Math.ceil(p/2) }
-
   const phase = (p) => {
-    const classes = [ "capitalize", periodPhase(p), (p === period.display ? 'currentPeriod' : '') ].join(" ")
-    return( <li key={p} className={classes} onClick={() => zoomTo(p)}>{periodName(p)}</li> )
+    const classes = [ "capitalize", Period.phase(p), (p === period.display ? 'currentPeriod' : '') ].join(" ")
+    return( <li key={p} className={classes} onClick={() => zoomTo(p)}>{Period.name(p)}</li> )
   }
 
   let periods = []
@@ -30,7 +27,7 @@ export default function PeriodPanel() {
   return(
     <nav id="gamePhase" aria-label="Game Phase">
       <ul>
-        <li key="signpost">Currently: <span onClick={decrementDisplay}>&lt;&lt;</span> <span className="capitalize" onClick={zoomCurrent}>{periodName(period.current)}</span> <span onClick={incrementDisplay}>&gt;&gt;</span></li>
+        <li key="signpost">Currently: <span onClick={decrementDisplay}>&lt;&lt;</span> <span className="capitalize" onClick={zoomCurrent}>{Period.name(period.current)}</span> <span onClick={incrementDisplay}>&gt;&gt;</span></li>
         {periods}
         <li key="next" onClick={addPeriod}>Add</li>
       </ul>

@@ -34,8 +34,8 @@ const App = () => {
   }
 
   return (<>
-      <PeriodProvider><PeriodPanel /></PeriodProvider>
-      <HistoryProvider><PlayersProvider><ScriptProvider>
+      <PeriodProvider><HistoryProvider><PlayersProvider><ScriptProvider>
+      <PeriodPanel />
       <div className="container">
         <div className="row">
           <ConfirmDialogProvider>
@@ -49,7 +49,7 @@ const App = () => {
         <div className="row">
         </div>
       </div>
-    </ScriptProvider></PlayersProvider></HistoryProvider>
+    </ScriptProvider></PlayersProvider></HistoryProvider></PeriodProvider>
     <button onClick={() => { window.localStorage.clear() }}>Clear storage</button>
     </>)
 };
