@@ -8,6 +8,11 @@ export default function PlayersPanel() {
   const [ editing, setEditing ] = useState(null)
   const players = usePlayers()
 
+  const addPlayer = (e) => {
+
+  }
+
+
   const display = (player) => {
     return (<li onClick={() => setEditing(player.id)}
                 onKeyUp={(e) => handleKeyUp(e, player)}
@@ -28,11 +33,12 @@ export default function PlayersPanel() {
     <ul>
       {players.players.map(display)}
     </ul>
+    <p onClick={(e) => addPlayer(e)}>Add</p>
     <h2>Storytellers</h2>
     <ul>
       {players.storytellers.map(display)}
     </ul>
-    <TravellerPanel playerCount={players.length} />
+    <TravellerPanel />
   </section>
   )
 }

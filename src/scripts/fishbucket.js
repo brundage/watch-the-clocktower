@@ -1,4 +1,5 @@
-/* { id: "fortune_teller",
+/* {
+	   id: "fortune_teller",
      image: "https://example.com/fortuneteller.png",
      firstNightReminder: "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
      otherNightReminder: "The Fortune Teller points to two players. Show the head signal (nod yes, shake no) for whether one of those players is the Demon.",
@@ -18,6 +19,7 @@
     Once per game
     Change character
     Demon finder
+		Gain ability
     Kill
     Die
     Choose
@@ -25,6 +27,7 @@
     Each night
     Each night*
     Trigger
+		Passive
     Setup ability
 */
 
