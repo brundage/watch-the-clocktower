@@ -1,7 +1,13 @@
 // https://react.dev/learn/scaling-up-with-reducer-and-context
 // https://medium.com/@williamjoshualacey/refactoring-redux-using-react-context-aa29fa16f4b7
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import initialParticipants from '../data/initial_participants'
+import defaultParticipants from '../data/default_participants'
+
+const actions = { add: "add", changed: "changed", edit: "edit" }
+export { actions }
+
+const roles = { player: "player", storyteller: "storyteller" }
+export { roles }
 
 const ParticipantsContext = createContext(null)
 const ParticipantsDispatchContext = createContext(null)
@@ -38,17 +44,39 @@ export function useParticipantsDispatch() {
 
 function loadinitialParticipants() {
   const saved = localStorage.getItem(localStorageKey);
-  const initial = saved !== null ? JSON.parse(saved) : initialParticipants;
+  const initial = saved !== null ? JSON.parse(saved) : defaultParticipants;
   return initial
 }
 
 
 function participantsReducer(participants, action) {
   switch (action.type) {
-    case 'changed': {
+    case actions.add: {
+      const pos = participants.participants.length
+      let p = [ ...participants.participants, action.participant ]
+      let townSquare = participants.townSquare
+      let storytellers = participants.storytellers
+      let ret = { participants: [ ...participants.participants, action.participant ],
+                  townSquare: participants.townSquare,
+                  storytellers: participants.storytellers
+                }
+
+      switch( action.role ) {
+        case roles.player: {
+          ret.townSquare.push(pos)
+          break
+        }
+        case roles.storyteller: {
+          ret.storytellers.push(pos)
+          break
+        }
+      }
+      return(ret)
+    }
+    case actions.changed: {
       return action.id
     }
-    case "edit": {
+    case actions.edit: {
       return({
         participants: participants.participants.map( (participant, i) => {
           if( i === action.id ) {

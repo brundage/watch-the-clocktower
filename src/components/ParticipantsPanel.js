@@ -1,20 +1,33 @@
 import React, { useState } from 'react'
-import { useParticipants } from './ParticipantsProvider';
+import { useParticipants, useParticipantsDispatch, actions, roles } from './ParticipantsProvider';
 import TravellerPanel from './TravellerPanel';
 import Player from './Player';
 
-
 export default function PlayersPanel() {
+  const dispatch = useParticipantsDispatch()
   const [ editing, setEditing ] = useState(null)
+  const [ adding, setAdding ] = useState(null)
+  const [ addingRole, setAddingRole ] = useState(null)
   const participants = useParticipants()
 
-  const addPlayer = (e) => {
 
+  const addBox = (role) => {
+    if( adding && addingRole === role ) {
+      return(<form onSubmit={e => handleAdd(e)} >
+               <input autoFocus={true} />
+             </form>)
+    } else {
+    return(<p onClick={(e) => {setAdding(true); setAddingRole(role)}}>Add</p>) 
+    }
   }
 
-
-  const addStoryteller = (e) => {
-
+  const handleAdd = (e) => {
+    e.preventDefault()
+    if( e.target[0].value !== "" ) {
+      dispatch({type: actions.add, participant: { display: e.target[0].value }, role: addingRole})
+    }
+    setAdding(false)
+    setAddingRole(null)
   }
 
 
@@ -36,16 +49,16 @@ export default function PlayersPanel() {
 
 
   return (<section id="players">
-    <h1>Players</h1>
+    <h1>Players ({participants.townSquare.length})</h1>
     <ul>
       {participants.townSquare.map(display)}
     </ul>
-    <p onClick={(e) => addPlayer(e)}>Add</p>
+    {addBox(roles.player)}
     <h2>Storytellers</h2>
     <ul>
       {participants.storytellers.map(display)}
     </ul>
-    <p onClick={(e) => addStoryteller(e)}>Add</p>
+    {addBox(roles.storyteller)}
     <TravellerPanel />
   </section>
   )

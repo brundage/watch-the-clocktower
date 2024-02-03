@@ -1,4 +1,4 @@
-const initialParticipants = {
+const defaultParticipants = {
   participants: [
     { display: "Occam Blazer" },
     { display: "Hungry"       },
@@ -12,4 +12,4 @@ const initialParticipants = {
   storytellers: [ 5 ]
 }
 
-export default initialParticipants
+export default defaultParticipants

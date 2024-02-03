@@ -1,10 +1,9 @@
 import React from "react"
-import { useParticipantsDispatch } from './ParticipantsProvider';
+import { actions, useParticipantsDispatch } from './ParticipantsProvider';
 
 /*
   {
     display: "Occam Razor",
-    id: 1,
     isGood: true,
     token: "washerwoman",
     abilities: [
@@ -20,7 +19,7 @@ export default function Player({id, player, editing=false}) {
       e.preventDefault()
       const newVal = e.target[0].value
       if( player.display !== newVal ) {
-        dispatch({type: "edit", id: id, changes: { display: newVal} })
+        dispatch({type: actions.edit, id: id, changes: { display: newVal} })
       }
     }
 
