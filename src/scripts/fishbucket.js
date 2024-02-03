@@ -2092,5 +2092,112 @@ export const fishbucket = [
 		"setup": false,
 		"ability": "Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead.",
 		"standardAmyPosition": 2
-	}
+	},
+	{
+    "id": "doomsayer",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/doomsayer.png",
+    "display": "Doomsayer",
+    "team": "fabled",
+    "ability": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies."
+  },
+  {
+    "id": "angel",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/angel.png",
+    "reminders": ["Protect", "Something Bad"],
+    "display": "Angel",
+    "team": "fabled",
+    "ability": "Something bad might happen to whoever is most responsible for the death of a new player."
+  },
+  {
+    "id": "buddhist",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/buddhist.png",
+    "display": "Buddhist",
+    "team": "fabled",
+    "ability": "For the first 2 minutes of each day, veteran players may not talk."
+  },
+  {
+    "id": "hellslibrarian",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/hellslibrarian.png",
+    "reminders": ["Something Bad"],
+    "display": "Hell's Librarian",
+    "team": "fabled",
+    "ability": "Something bad might happen to whoever talks when the Storyteller has asked for silence."
+  },
+  {
+    "id": "revolutionary",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/revolutionary.png",
+    "reminders": ["Used"],
+    "display": "Revolutionary",
+    "team": "fabled",
+    "ability": "2 neighboring players are known to be the same alignment. Once per game, one of them registers falsely."
+  },
+  {
+    "id": "fiddler",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/fiddler.png",
+    "display": "Fiddler",
+    "team": "fabled",
+    "ability": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win."
+  },
+  {
+    "id": "toymaker",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/toymaker.png",
+    "otherNightReminder": "If it is a night when a Demon attack could end the game, and the Demon is marked \u201cFinal night: No Attack,\u201d then the Demon does not act tonight. (Do not wake them.)",
+    "reminders": ["Final Night: No Attack"],
+    "display": "Toymaker",
+    "team": "fabled",
+    "ability": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
+    "otherNight": 2
+  },
+  {
+    "id": "fibbin",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/fibbin.png",
+    "reminders": ["Used"],
+    "display": "Fibbin",
+    "team": "fabled",
+    "ability": "Once per game, 1 good player might get false information."
+  },
+  {
+    "id": "duchess",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/duchess.png",
+    "otherNightReminder": "Wake each player marked \u201cVisitor\u201d or \u201cFalse Info\u201d one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked \u201cVisitor\u201d or, if you are waking the player marked \u201cFalse Info,\u201d show them any number of fingers except the number of evil players marked \u201cVisitor.\u201d",
+    "reminders": ["Visitor",
+      "False Info"],
+    "display": "Duchess",
+    "team": "fabled",
+    "ability": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
+    "otherNight": 3
+  },
+  {
+    "id": "sentinel",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/sentinel.png",
+    "setup": true,
+    "display": "Sentinel",
+    "team": "fabled",
+    "ability": "There might be 1 extra or 1 fewer Outsider in play."
+  },
+	{
+    "id": "spiritofivory",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/spiritofivory.png",
+    "reminders": ["No extra evil"],
+    "display": "Spirit of Ivory",
+    "team": "fabled",
+    "ability": "There can't be more than 1 extra evil player."
+  },
+	{
+    "id": "djinn",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/djinn.png",
+    "display": "Djinn",
+    "team": "fabled",
+    "ability": "Use the Djinn's special rule. All players know what it is."
+  },
+	{
+    "id": "stormcatcher",
+    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/stormcatcher.png",
+    "firstNightReminder": "Mark a good player as \"Safe\". Wake each evil player and show them the marked player.",
+    "reminders": ["Safe"],
+    "display": "Storm Catcher",
+    "team": "fabled",
+    "ability": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
+    "firstNight": 11
+  }
 ]

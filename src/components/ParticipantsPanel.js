@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
-import { usePlayers } from './PlayersProvider';
+import { useParticipants } from './ParticipantsProvider';
 import TravellerPanel from './TravellerPanel';
 import Player from './Player';
 
 
 export default function PlayersPanel() {
   const [ editing, setEditing ] = useState(null)
-  const players = usePlayers()
+  const participants = useParticipants()
 
   const addPlayer = (e) => {
 
   }
 
 
-  const display = (player) => {
-    return (<li onClick={() => setEditing(player.id)}
+  const addStoryteller = (e) => {
+
+  }
+
+
+  const display = (playerId) => {
+    const player = participants.participants[playerId]
+    if( player === undefined ) { throw Error("player with id " + playerId + " not found") }
+    return (<li onClick={() => setEditing(playerId)}
                 onKeyUp={(e) => handleKeyUp(e, player)}
-                key={player.id}>
-              <Player editing={editing === player.id} player={player} />
+                key={playerId}>
+              <Player editing={editing === playerId} id={playerId} player={player} />
             </li>);
   }
 
@@ -31,13 +38,14 @@ export default function PlayersPanel() {
   return (<section id="players">
     <h1>Players</h1>
     <ul>
-      {players.players.map(display)}
+      {participants.townSquare.map(display)}
     </ul>
     <p onClick={(e) => addPlayer(e)}>Add</p>
     <h2>Storytellers</h2>
     <ul>
-      {players.storytellers.map(display)}
+      {participants.storytellers.map(display)}
     </ul>
+    <p onClick={(e) => addStoryteller(e)}>Add</p>
     <TravellerPanel />
   </section>
   )

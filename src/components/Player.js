@@ -1,5 +1,5 @@
 import React from "react"
-import { usePlayersDispatch } from './PlayersProvider';
+import { useParticipantsDispatch } from './ParticipantsProvider';
 
 /*
   {
@@ -13,14 +13,14 @@ import { usePlayersDispatch } from './PlayersProvider';
   }
 */
 
-export default function Player({player, editing=false}) {
-    const dispatch = usePlayersDispatch()
+export default function Player({id, player, editing=false}) {
+    const dispatch = useParticipantsDispatch()
 
     const handleSubmit = (e) => {
       e.preventDefault()
       const newVal = e.target[0].value
       if( player.display !== newVal ) {
-        dispatch({type: "edit", id: player.id, changes: { display: newVal} })
+        dispatch({type: "edit", id: id, changes: { display: newVal} })
       }
     }
 

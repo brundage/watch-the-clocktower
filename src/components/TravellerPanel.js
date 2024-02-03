@@ -1,10 +1,10 @@
 import React from "react";
 import travelerSheet from "../data/traveler_sheet"
-import { usePlayers } from "./PlayersProvider"
+import { useParticipants } from "./ParticipantsProvider"
 
 export default function TravellerPanel({ playerCount }) {
-  const players = usePlayers()
-  const sheet = travelerSheet[players.players.length] || {
+  const participants = useParticipants()
+  const sheet = travelerSheet[participants.townSquare.length] || {
     "townsfolk": 0,
     "outsiders": 0,
     "minions": 0,
@@ -24,22 +24,22 @@ export default function TravellerPanel({ playerCount }) {
       <tr>
         <td>Townsfolk</td>
         <td>{sheet["townsfolk"]}</td>
-        <td>not implemented</td>
+        <td>N/A</td>
       </tr>
       <tr>
         <td>Outsiders</td>
         <td>{sheet["outsiders"]}</td>
-        <td>not implemented</td>
+        <td>N/A</td>
       </tr>
       <tr>
         <td>Minions</td>
         <td>{sheet["minions"]}</td>
-        <td>not implemented</td>
+        <td>N/A</td>
         </tr>
         <tr>
           <td>Demons</td>
           <td>{sheet["demons"]}</td>
-          <td>not implemented</td>
+          <td>N/A</td>
         </tr>
       </tbody>
     </table>

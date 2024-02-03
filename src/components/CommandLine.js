@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { MentionsInput, Mention } from 'react-mentions'
 import { useScript } from './ScriptProvider'
-import { usePlayers } from './PlayersProvider'
+import { useParticipants } from './ParticipantsProvider'
 import { useHistoryDispatch } from './HistoryProvider'
 import { usePeriod } from './PeriodProvider'
 
 export default function CommandLine() {
   const [value, setValue] = useState("")
-  const players = usePlayers()
+  const participants = useParticipants()
   const script = useScript()
   const historyDispatch = useHistoryDispatch()
   const period = usePeriod()
 
-  const autocompleteForPlayers = () => { return players.players.concat(players.storytellers) }
+  const autocompleteForParticipants = () => { return participants.participants }
   const autocompleteForScript = () => { return script.characters.map((entry) => {return {id: entry.id, display: entry.display}})}
 
 
@@ -43,7 +43,7 @@ return (<form onSubmit={(e) => { handleSubmit(e, historyDispatch)}}>
       <Mention
         appendSpaceOnAdd={true}
         trigger="@"
-         data={autocompleteForPlayers()}
+         data={autocompleteForParticipants()}
       />
       <Mention
         appendSpaceOnAdd={true}
