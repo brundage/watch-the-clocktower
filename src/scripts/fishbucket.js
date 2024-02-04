@@ -1961,6 +1961,11 @@ export const fishbucket = [
 		"standardAmyPosition": 2
 	},
 	{
+    "id": "village_idiot",
+		"display": "Village Idiot",
+		"team": "townsfolk"
+	},
+	{
 		"id": "vigormortis",
 		"display": "Vigormortis",
 		"edition": "snv",

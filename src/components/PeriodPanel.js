@@ -1,16 +1,16 @@
 import React from "react";
-import { usePeriod, usePeriodDispatch } from "./PeriodProvider";
+import { actions, usePeriod, usePeriodDispatch } from "./PeriodProvider";
 import Period from '../util/period'
 
 export default function PeriodPanel() {
   const dispatch = usePeriodDispatch()
   const period   = usePeriod()
 
-  const decrementDisplay = ()  => { dispatch({type: 'decrementDisplay'}) }
-  const incrementDisplay = ()  => { dispatch({type: 'incrementDisplay'}) }
-  const zoomCurrent      = ()  => { dispatch({type: 'zoomCurrent'     }) }
-  const zoomTo           = (p) => { dispatch({type: 'zoom', to: p     }) }
-  const addPeriod        = ()  => { dispatch({type: 'addPeriod'       }) }
+  const decrementDisplay = ()  => { dispatch({type: actions.decrementDisplay }) }
+  const incrementDisplay = ()  => { dispatch({type: actions.incrementDisplay }) }
+  const zoomCurrent      = ()  => { dispatch({type: actions.zoomCurrent      }) }
+  const zoomTo           = (p) => { dispatch({type: actions.zoom, to: p      }) }
+  const addPeriod        = ()  => { dispatch({type: actions.addPeriod        }) }
 
   const phase = (p) => {
     const classes = [ "capitalize", Period.phase(p), (p === period.display ? 'currentPeriod' : '') ].join(" ")

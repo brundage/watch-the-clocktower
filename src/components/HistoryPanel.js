@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useHistoryDispatch } from './HistoryProvider'
+import { actions, useHistory, useHistoryDispatch } from './HistoryProvider'
 import useConfirmDialog from "./ConfirmDialog"
 import HistoryEntry from './HistoryEntry'
 
@@ -15,7 +15,7 @@ export default function HistoryPanel({formatting}) {
 
   const handleClear = async () => {
     const ans = await confirmClear()
-    if( ans ) { historyDispatcher({type: "clear"})}
+    if( ans ) { historyDispatcher({type: actions.clear})}
   }
 
   function sorter(a,b) {

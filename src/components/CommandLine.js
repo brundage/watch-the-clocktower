@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { MentionsInput, Mention } from 'react-mentions'
 import { useScript } from './ScriptProvider'
 import { useParticipants } from './ParticipantsProvider'
-import { useHistoryDispatch } from './HistoryProvider'
+import { actions, useHistoryDispatch } from './HistoryProvider'
 import { usePeriod } from './PeriodProvider'
 
 export default function CommandLine() {
-  const [value, setValue] = useState("")
+  const [ value, setValue ] = useState("")
+  const [ mentionData, setMentionData ] = useState()
   const participants = useParticipants()
   const script = useScript()
   const historyDispatch = useHistoryDispatch()
   const period = usePeriod()
 
-  const autocompleteForParticipants = () => { return participants.participants }
-  const autocompleteForScript = () => { return script.characters.map((entry) => {return {id: entry.id, display: entry.display}})}
+
+  const autocompleteForCharacters = useMemo(
+    () => {
+      return script.characters.map( (character) => {
+        return Object.assign( {type: "character"}, character )
+    })
+    },
+    [script.characters]
+  )
+
+
+  const autocompleteForParticipants = useMemo(
+    () => {
+      return participants.participants.map( (participant, id) => {
+        return Object.assign( {id: id, type: "participant"}, participant)
+      })
+    },
+    [participants.participants]
+  )
 
 
   const handleChange = (event, newValue, newPlainTextValue, mentions) => {
@@ -21,7 +39,8 @@ export default function CommandLine() {
     // console.log("newValue", newValue)
     // console.log("newPlainTextValue", newPlainTextValue)
     // console.log("mentions", mentions)
-    setValue(newPlainTextValue)
+    setMentionData({newValue, newPlainTextValue, mentions})
+    setValue(newValue)
   }
 
 
@@ -29,29 +48,35 @@ export default function CommandLine() {
     e.preventDefault()
     const tgt = e.target[0]
     if( tgt.value.length > 0 ) {
-      historyDispatch({ type: "append",
+      historyDispatch({ type: actions.append,
                         message: tgt.value,
                         period: period
                      })
       setValue("")
+      setMentionData("")
     }
   }
 
 
-return (<form onSubmit={(e) => { handleSubmit(e, historyDispatch)}}>
+  return( <form onSubmit={(e) => { handleSubmit(e, historyDispatch)}}>
     <MentionsInput onChange={handleChange} singleLine={true} value={value} placeholder="Kill with grace, die with dignity." >
       <Mention
         appendSpaceOnAdd={true}
+        data={autocompleteForParticipants}
+        markup="@{{participant||__id__||__display__}}"
         trigger="@"
-         data={autocompleteForParticipants()}
       />
       <Mention
         appendSpaceOnAdd={true}
+        data={autocompleteForCharacters}
+        markup=":{{character||__id__||__display__}}"
         trigger=":"
-        data={autocompleteForScript()}
       />
       </MentionsInput>
-      <p><strong>Value:</strong> {value}</p>
+      <h3>Mention Data</h3>
+      {JSON.stringify(mentionData)}
+      <h3>Raw Value</h3>
+      {value}
   </form>
   )
 }

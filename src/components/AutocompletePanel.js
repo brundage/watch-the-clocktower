@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AutocompletePanel({entries,selected,onItemSelected}) {
+export default function AutocompletePanel({entries, selected, onItemSelected}) {
 
     if( entries.length <= 0 ) { return null }
   

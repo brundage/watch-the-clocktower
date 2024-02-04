@@ -1,6 +1,7 @@
 // https://react.dev/learn/scaling-up-with-reducer-and-context
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 
+export const actions = { append: "append", clear: "clear" }
 
 const HistoryContext = createContext(null)
 const HistoryDispatchContext = createContext(null)
@@ -44,13 +45,13 @@ function loadInitialHistory() {
 
 function historyReducer(history, action) {
     switch( action.type ) {
-        case 'append': {
+        case actions.append: {
             return [...history, { entry: action.message,
                                   id: Date.now(),
                                   period: action.period
                                 }]
         }
-        case 'clear': {
+        case actions.clear: {
             return []
         }
         default: {

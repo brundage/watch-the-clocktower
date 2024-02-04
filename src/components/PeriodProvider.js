@@ -2,6 +2,13 @@
 // https://medium.com/@williamjoshualacey/refactoring-redux-using-react-context-aa29fa16f4b7
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 
+export const actions = { addPeriod: "addPeriod",
+                         decrementDisplay: "decrementDisplay",
+                         incrementDisplay: "incrementDisplay",
+                         zoom: "zoom",
+                         zoomCurrent: "zoomCurrent"
+                       }
+
 const PeriodContext = createContext(null)
 const PeriodDispatchContext = createContext(null)
 const localStorageKey = "period"
@@ -46,10 +53,10 @@ function loadInitialPeriod() {
 
 function periodReducer(period, action) {
   switch( action.type ) {
-    case 'addPeriod': {
+    case actions.addPeriod: {
       return({ ...period, current: period.current + 1, display: period.current + 1 })
     }
-    case 'decrementDisplay': {
+    case actions.decrementDisplay: {
       if( period.display > 1 ) {
         return({ ...period, display: period.display - 1 })
       } else {
@@ -57,11 +64,11 @@ function periodReducer(period, action) {
       }
     }
 
-    case 'incrementCurrent': {
+    case actions.incrementCurrent: {
       return({ ...period, current: period.current + 1 })
     }
 
-    case 'incrementDisplay': {
+    case actions.incrementDisplay: {
       if( period.display < period.current ) {
         return({ ...period, display: period.display + 1 })
       } else {
@@ -69,11 +76,11 @@ function periodReducer(period, action) {
       }
     }
 
-    case 'zoom': {
+    case actions.zoom: {
       return({ ...period, display: action.to })
     }
 
-    case 'zoomCurrent': {
+    case actions.zoomCurrent: {
       return({ ...period, display: period.current })
     }
 

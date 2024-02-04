@@ -53,9 +53,6 @@ function participantsReducer(participants, action) {
   switch (action.type) {
     case actions.add: {
       const pos = participants.participants.length
-      let p = [ ...participants.participants, action.participant ]
-      let townSquare = participants.townSquare
-      let storytellers = participants.storytellers
       let ret = { participants: [ ...participants.participants, action.participant ],
                   townSquare: participants.townSquare,
                   storytellers: participants.storytellers
