@@ -2,6 +2,7 @@ import React from 'react'
 import { useScript, useScriptDispatch } from "./ScriptProvider"
 import JSONLoader from './JsonLoader'
 import Character from './Character'
+import { actions } from "./ScriptProvider"
 
 export default function ScriptPanel() {
   const loadedScript = useScript()
@@ -55,7 +56,7 @@ export default function ScriptPanel() {
       <ul>
         {script.characters.filter(rejector).sort(sorter).map(display)}
       </ul>
-      <JSONLoader handleRead={(data) => { dispatch({type: 'loaded', loadedScript: data}) }} />
+      <JSONLoader handleRead={(data) => { dispatch({type: actions.loaded, loadedScript: data}) }} />
     </section>
   )
 }

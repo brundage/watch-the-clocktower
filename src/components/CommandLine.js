@@ -5,6 +5,8 @@ import { useParticipants } from './ParticipantsProvider'
 import { actions, useHistoryDispatch } from './HistoryProvider'
 import { usePeriod } from './PeriodProvider'
 
+// https://stackblitz.com/edit/react-mentions?file=index.js
+
 export default function CommandLine() {
   const [ value, setValue ] = useState("")
   const [ mentionData, setMentionData ] = useState()

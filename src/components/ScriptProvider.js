@@ -1,7 +1,11 @@
 // https://react.dev/learn/scaling-up-with-reducer-and-context
+// https://redux.js.org/usage/structuring-reducers/refactoring-reducer-example
+// https://stackoverflow.com/questions/69469855/how-to-refactor-this-reducer-following-separation-of-concerns-and-avoiding-code
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { troubleBrewing as defaultScript } from '../scripts/trouble_brewing'
 import scriptParser from '../util/scriptParser'
+
+export const actions = { loaded: "loaded" }
 
 const ScriptContext = createContext(null)
 const ScriptDispatchContext = createContext(null)
@@ -45,12 +49,8 @@ function loadInitialScript() {
 
 
 function scriptReducer(currentScript, action) {
-
   switch( action.type ) {
-    case 'changed': {
-      return action.changedScript
-    }
-    case 'loaded': {
+    case actions.loaded: {
       return scriptParser(action.loadedScript)
     }
     default: {
