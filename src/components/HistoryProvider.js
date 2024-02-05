@@ -48,10 +48,7 @@ function loadInitialHistory() {
 function historyReducer(history, action) {
     switch( action.type ) {
         case actions.append: {
-            return [...history, { entry: action.message,
-                                  id: Date.now(),
-                                  period: action.period
-                                }]
+            return [...history, Object.assign({ id: Date.now() }, action.entry) ]
         }
         case actions.clear: {
             return []

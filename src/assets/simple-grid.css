@@ -18,7 +18,7 @@ html, body {
 
 * {
   font-family: 'Lato', Helvetica, sans-serif;
-  color: #333447;
+  /* color: #333447; messes with the text box for some reason */
   line-height: 1.5;
 }
 

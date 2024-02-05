@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-export default function Character({ character }) {
+export function Character({character}) {
+  return(<span className={character.team}>{character.display}</span>)
+}
+
+
+export default function CharacterCard({ character, includeTooltip=true }) {
   const [showTooltip, setShowTooltip] = useState(false)
   const [runningTimeout, setRunningTimeout] = useState()
 
@@ -34,10 +39,9 @@ export default function Character({ character }) {
     return null
   }
 
-
   return (
-    <li onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-      <span className={character.team}>{character.display}</span> <Tooltip />
-    </li>
+    <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+      <Character character={character} /> <Tooltip />
+    </div>
   )
 }

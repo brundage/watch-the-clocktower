@@ -1,7 +1,7 @@
 import React from 'react'
 import { useScript, useScriptDispatch } from "./ScriptProvider"
 import JSONLoader from './JsonLoader'
-import Character from './Character'
+import CharacterCard from './CharacterCard'
 import { actions } from "./ScriptProvider"
 
 export default function ScriptPanel() {
@@ -43,7 +43,7 @@ export default function ScriptPanel() {
 
 
   function display(entry) {
-    return (<Character key={entry.id} character={entry} />);
+    return (<li key={entry.id}><CharacterCard character={entry} /></li>);
   }
 
   

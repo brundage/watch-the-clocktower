@@ -1822,6 +1822,22 @@ export const fishbucket = [
 		"standardAmyPosition": 1
 	},
 	{
+		"id": "snake_charmer",
+		"display": "Snake Charmer",
+		"edition": "snv",
+		"team": "townsfolk",
+		"firstNight": 20,
+		"firstNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
+		"otherNight": 11,
+		"otherNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
+		"reminders": [
+			"Poisoned"
+		],
+		"setup": false,
+		"ability": "Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.",
+		"standardAmyPosition": 1
+	},
+	{
 		"id": "snitch",
 		"display": "Snitch",
 		"edition": "",
@@ -1959,6 +1975,12 @@ export const fishbucket = [
 		"setup": false,
 		"ability": "Each night*, you learn which character died by execution today.",
 		"standardAmyPosition": 2
+	},
+	{
+    "id": "ojo",
+		"display": "Ojo",
+		"team": "demon",
+		"ability": "Each night*, choose a character: they die. If they are not in play, the Storyteller chooses who dies."
 	},
 	{
     "id": "village_idiot",

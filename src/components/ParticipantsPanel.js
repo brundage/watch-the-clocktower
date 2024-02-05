@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useParticipants, useParticipantsDispatch, actions, roles } from './ParticipantsProvider';
 import TravellerPanel from './TravellerPanel';
-import Player from './Player';
+import Participant from './Participant';
+
 
 export default function PlayersPanel() {
   const dispatch = useParticipantsDispatch()
@@ -31,13 +32,13 @@ export default function PlayersPanel() {
   }
 
 
-  const display = (playerId) => {
-    const player = participants.participants[playerId]
-    if( player === undefined ) { throw Error("player with id " + playerId + " not found") }
-    return (<li onClick={() => setEditing(playerId)}
-                onKeyUp={(e) => handleKeyUp(e, player)}
-                key={playerId}>
-              <Player editing={editing === playerId} id={playerId} player={player} />
+  const display = (participantId) => {
+    const participant = participants.participants[participantId]
+    if( participant === undefined ) { throw Error("participant with id " + participantId + " not found") }
+    return (<li onClick={() => setEditing(participantId)}
+                onKeyUp={(e) => handleKeyUp(e, participant)}
+                key={participantId}>
+              <Participant editing={editing === participantId} participant={participant} />
             </li>);
   }
 
