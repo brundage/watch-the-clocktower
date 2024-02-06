@@ -6,16 +6,15 @@ import HistoryEntry from './HistoryEntry'
 
 export default function HistoryPanel({formatting}) {
   const history = useHistory()
-  const historyDispatcher = useHistoryDispatch()
+  const dispatch = useHistoryDispatch()
   const confirmClear = useConfirmDialog()
-
   function display(entry) {
     return( <li key={entry.id}><HistoryEntry entry={entry} formatting={formatting} /></li> )
   }
 
   const handleClear = async () => {
     const ans = await confirmClear()
-    if( ans ) { historyDispatcher({type: actions.clear})}
+    if( ans ) { dispatch({type: actions.clear})}
   }
 
   function sorter(a,b) {

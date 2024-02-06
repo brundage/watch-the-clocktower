@@ -3,23 +3,12 @@ import { useParticipants, useParticipantsDispatch, actions, roles } from './Part
 import TravellerPanel from './TravellerPanel';
 import EditableField from './EditableField';
 import Participant from "./Participant"
+import useConfirmDialog from "./ConfirmDialog"
 
 export default function PlayersPanel() {
   const dispatch = useParticipantsDispatch()
-  const [ adding, setAdding ] = useState(null)
-  const [ addingRole, setAddingRole ] = useState(null)
   const participants = useParticipants()
-
-
-  const addBox = (role) => {
-    if( adding && addingRole === role ) {
-      return(<form onSubmit={e => handleAdd(e)} >
-               <input autoFocus={true} />
-             </form>)
-    } else {
-    return(<p onClick={(e) => {setAdding(true); setAddingRole(role)}}>Add</p>) 
-    }
-  }
+  const confirmRemove = useConfirmDialog()
 
   const handleAddTown = (e, id, newParticipant) => {
     handleAdd(e, roles.player, newParticipant)
@@ -43,6 +32,12 @@ export default function PlayersPanel() {
       dispatch({type: actions.edit, id: id, changes: { display: updatedValue } })
     }
   }
+
+
+  const removeParticipant = async(e, id) => {
+    const ans = await confirmRemove()
+    if( ans ) { dispatch({type: actions.remove, id: id})}
+  }
   
 
   const display = (participantId) => {
@@ -52,6 +47,7 @@ export default function PlayersPanel() {
               <EditableField value={participant.display} id={participantId} onSubmit={handleSubmit}>
                 <Participant id={participantId} participant={participant} />
               </EditableField>
+              <button onClick={(e) => removeParticipant(e,participantId)}>X</button>
             </li>);
   }
 

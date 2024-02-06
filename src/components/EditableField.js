@@ -12,7 +12,7 @@ export default function EditableField({ value,
 
   const cancelEdit = () => setEditing(false)
 
-  const handlers = Object.assign({
+  const handlers = {
     onBlur: (e) => cancelEdit(),
 
     onClick: (e) => setEditing(true),
@@ -26,7 +26,10 @@ export default function EditableField({ value,
       cancelEdit()
       onSubmit(e, id, e.target[0].value)
     }
-  },{blur: onBlur, onKeyUp: onKeyUp})
+  }
+  
+  if( onBlur  !== undefined ) { handlers.onBlur  = onBlur  }
+  if( onKeyUp !== undefined ) { handlers.onKeyUp = onKeyUp }
 
   if( editing ) {
     return(

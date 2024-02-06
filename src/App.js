@@ -36,9 +36,9 @@ const App = () => {
         <div className="row">
           <ConfirmDialogProvider>
             <div className="col-4"><HistoryPanel formatting={formatting} /></div>
+            <div className="col-4"><ParticipantsPanel /></div>
+            <div className="col-4"><ScriptPanel /></div>
           </ConfirmDialogProvider>
-          <div className="col-4"><ParticipantsPanel /></div>
-          <div className="col-4"><ScriptPanel /></div>
         </div>
         <hr />
         <div className="row"><CommandLine /></div>

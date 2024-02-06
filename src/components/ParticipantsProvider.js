@@ -5,7 +5,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import defaultParticipants from '../data/default_participants'
 
-const actions = { add: "add", changed: "changed", edit: "edit" }
+const actions = { add: "add", changed: "changed", edit: "edit", remove: "remove" }
 export { actions }
 
 const roles = { player: "player", storyteller: "storyteller" }
@@ -86,6 +86,13 @@ function participantsReducer(participants, action) {
         }),
         townSquare: participants.townSquare,
         storytellers: participants.storytellers
+      })
+    }
+    case actions.remove: {
+      return({
+        participants: participants.participants.filter((p, i) => i !== action.id),
+        townSquare:   participants.townSquare.filter((id) => id !== action.id ),
+        storytellers: participants.storytellers.filter((id) => id !== action.id )
       })
     }
     default: {
