@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { useParticipants, useParticipantsDispatch, actions, roles } from './ParticipantsProvider';
 import TravellerPanel from './TravellerPanel';
-import Participant from './Participant';
-
+import EditableField from './EditableField';
+import Participant from "./Participant"
 
 export default function PlayersPanel() {
   const dispatch = useParticipantsDispatch()
-  const [ editing, setEditing ] = useState(null)
   const [ adding, setAdding ] = useState(null)
   const [ addingRole, setAddingRole ] = useState(null)
   const participants = useParticipants()
@@ -22,30 +21,38 @@ export default function PlayersPanel() {
     }
   }
 
-  const handleAdd = (e) => {
-    e.preventDefault()
-    if( e.target[0].value !== "" ) {
-      dispatch({type: actions.add, participant: { display: e.target[0].value }, role: addingRole})
-    }
-    setAdding(false)
-    setAddingRole(null)
+  const handleAddTown = (e, id, newParticipant) => {
+    handleAdd(e, roles.player, newParticipant)
   }
 
+  const handleAddStoryteller  = (e, id, newParticipant) => {
+    handleAdd(e, roles.storyteller, newParticipant)
+  }
+
+  const handleAdd = (e, role, newParticipant) => {
+    e.preventDefault()
+    if( newParticipant !== "" ) {
+      dispatch({type: actions.add, participant: { display: newParticipant }, role: role})
+    }
+  }
+
+
+  const handleSubmit = (e, id, updatedValue) => {
+    e.preventDefault()
+    if( updatedValue !== "" ) {
+      dispatch({type: actions.edit, id: id, changes: { display: updatedValue } })
+    }
+  }
+  
 
   const display = (participantId) => {
     const participant = participants.participants[participantId]
     if( participant === undefined ) { throw Error("participant with id " + participantId + " not found") }
-    return (<li onClick={() => setEditing(participantId)}
-                onKeyUp={(e) => handleKeyUp(e, participant)}
-                key={participantId}>
-              <Participant editing={editing === participantId} participant={participant} />
+    return (<li key={participantId}>
+              <EditableField value={participant.display} id={participantId} onSubmit={handleSubmit}>
+                <Participant id={participantId} participant={participant} />
+              </EditableField>
             </li>);
-  }
-
-
-  const handleKeyUp = (e, player) => {
-    e.key === "Escape" && setEditing(null)
-    e.key === "Enter" && setEditing(null)
   }
 
 
@@ -54,12 +61,12 @@ export default function PlayersPanel() {
     <ul>
       {participants.townSquare.map(display)}
     </ul>
-    {addBox(roles.player)}
+    <EditableField value="" onSubmit={handleAddTown}>Add</EditableField>
     <h2>Storytellers</h2>
     <ul>
       {participants.storytellers.map(display)}
     </ul>
-    {addBox(roles.storyteller)}
+    <EditableField value="" onSubmit={handleAddStoryteller}>Add</EditableField>
     <TravellerPanel />
   </section>
   )

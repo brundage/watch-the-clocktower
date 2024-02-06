@@ -20,6 +20,7 @@ import { PeriodProvider } from './components/PeriodProvider';
     Phase
 */
 
+// https://javascript.plainenglish.io/embrace-react-composition-for-cleaner-code-a-better-alternative-to-provider-wrapper-hell-ead75512091a
 const App = () => {
   const [formatting, setFormatting] = useState({
     "dateFormat": { "hour": "numeric", "minute": "numeric", "second": "numeric" },
