@@ -3,24 +3,24 @@
 
   Period: { current: 5, display: 4 }
 
-  Players: [
-    { display: "Occam Razor",
-      id: 1,
+  Participants: [
+    { id: 1,
+      display: Occam Blazer,
       isGood: true,
-      token: "washerwoman",
-      abilities: [ "washerwoman" ]
+      isAlive: true,
+      registersGood: isGood,
+      registersAlive: isAlive
+      team: townsfolk
+      registersAs: [ townsfolk ]
     },
     ...
   ]
-  
-  Storytellers: [
-    { display: 
-      id:
-      token:
-      abilities: [ ]
-    },
-    ...
-  ]
+
+  // Participant ids
+  Storytellers: [ 0, ... ]
+
+  // Participant ids
+  Seats: [ 1, 2, 3, .... ]
 
   Script: {
     meta: {

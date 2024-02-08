@@ -1,12 +1,11 @@
 import React, { useMemo } from "react"
 import { Character } from "./CharacterCard"
-import { historyMarkup } from "./CommandLine"
+import { historyMarkup, mentionTypes } from "./CommandLine"
 import Period from "../util/period"
 import { usePeriod } from "./PeriodProvider"
 import { useScript } from "./ScriptProvider"
 import { useParticipants } from "./ParticipantsProvider"
 import Participant from "./Participant"
-
 
 export default function HistoryEntry({entry, formatting}) {
   const period = usePeriod()
@@ -17,45 +16,68 @@ export default function HistoryEntry({entry, formatting}) {
   const script = useScript()
   const participants = useParticipants()
 
-  const renderEntry = (text) => {
-    let markup = text.markup
-    if( ! historyMarkup.regexp.test(markup) ) { return text }
-
+  function historyLexer(markup) {
+    if( ! historyMarkup.withPrecap.test(markup) ) { return text }
+  
     let match
     const result = []
-
+  
     while( markup.length > 0 ) {
-      match = markup.match(historyMarkup.regexp)
+      match = markup.match(historyMarkup.withPrecap)
       if( match ) {
-
         if( match.groups.pre.length > 0 ) {
-          result.push( match.groups.pre )
+          result.push( { type: "string", entry: match.groups.pre } )
         }
-
+  
         switch( match.groups.role ) {
-          case "participant": {
-            const participant = participants.participants[match.groups.id]
-            result.push( <Participant key={match.groups.id} participant={participant} />)
+          case mentionTypes.participant: {
+            const participant = Object.assign({id: match.groups.id}, participants.participants[match.groups.id])
+            result.push({ type: mentionTypes.participant, entry: participant })
             break
           }
-          case "character": {
+          case mentionTypes.character: {
             const character = script.characters.filter( (e) => { return e.id === match.groups.id })[0]
             if( character !== undefined ) {
-              result.push( <Character key={match.groups.id} character={character} includeTooltip={false} />)
+              result.push({type: mentionTypes.character, entry: character})
             }
             break
           }
+          case mentionTypes.command: {
+            result.push({type: mentionTypes.command, entry: { display: match.groups.id } })
+            break
+          }
           default: {
+            result.push( {type: "string", entry: match.groups.display })
           }
         }
         markup = markup.replace(match[0], "")
-
+  
       } else {
-        result.push(markup)
+        result.push({type: "string", entry: markup})
         markup = ""
       }
     }
     return result
+  }
+
+
+  const renderEntry = (text) => {
+        return historyLexer(text.markup).map( (token) => {
+      switch(token.type) {
+        case mentionTypes.character: {
+          return <Character key={token.entry.id} character={token.entry} includeTooltip={false} />
+        }
+        case mentionTypes.command: {
+          return token.entry.display
+        }
+        case mentionTypes.participant: {
+          return <Participant key={token.entry.id} participant={token.entry} />
+        }
+        case "string": {
+          return token.entry
+        }
+      }
+    })
   }
 
 
