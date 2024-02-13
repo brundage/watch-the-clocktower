@@ -1,39 +1,18 @@
-import { fishbucket } from "../scripts/fishbucket"
+import searchFishbucket from "../scripts/fishbucket"
+import { logDebug, logWarn } from "../util/logger"
 
-/*
-  script = {
-    meta: {
-      almanac:
-      author:
-      name:
-    },
-    characters: [
-      { id: "fortune_teller",
-        image: "https://example.com/fortuneteller.png",
-        firstNightReminder: "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
-        otherNightReminder: "The Fortune Teller points to two players. Show the head signal (nod yes, shake no) for whether one of those players is the Demon.",
-        reminders: [ "Red herring" ],
-        display: "Fortune Teller",
-        effects: [ "each night", "demon finder", "choose" ]
-        team: "townsfolk",
-        ability: "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
-        firstNight: 16,
-        otherNight: 3,
-        standardAmyPosition: 2
-      }, ...
-    ]
-  }
-*/
+const warn = logWarn({identifier: "scriptParser"})
+const debug = logDebug({identifier: "scriptParser"})
 
-const scriptParser = (scriptJSON) => {
+const scriptParser = (script) => {
   const META_STRING = "_meta"
 
   const extractMeta = () => {
-    if( typeof(scriptJSON[0] === "object" && scriptJSON[0].id === META_STRING ) ) { return(scriptJSON[0]) }
+    if( typeof(script[0] === "object" && script[0].id === META_STRING ) ) { return(script[0]) }
   }
 
 
-  const mapper = (entry) => {
+  const lookup = (entry) => {
     switch( typeof entry ) {
       case("string"):
         return searchFishbucket(entry)
@@ -43,20 +22,22 @@ const scriptParser = (scriptJSON) => {
         }
       default:
         if( entry.id !== META_STRING ) {
-          console.log("Unrecognized script entry: ", entry)
+          warn("Unrecognized script entry: ", entry)
         }
     }
   }
 
 
-  const rejector = (entry) => { return entry !== undefined }
+  const reducer = (hash, entry) => {
+    const character = lookup(entry)
+    if( character ) {
+      hash[character.id] = character
+    }
+    return hash
+  }
 
-
-  const searchFishbucket = (charId) => { return fishbucket.find( (item) => item.id === charId ) }
-
-  
   return { meta: extractMeta(),
-           characters: scriptJSON.map(mapper).filter(rejector)
+           characters: script.reduce(reducer,{})
          }
 }
 

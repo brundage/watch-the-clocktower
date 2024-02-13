@@ -1,48 +1,57 @@
 /* {
-	   id: "fortune_teller",
-     image: "https://example.com/fortuneteller.png",
-     firstNightReminder: "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
-     otherNightReminder: "The Fortune Teller points to two players. Show the head signal (nod yes, shake no) for whether one of those players is the Demon.",
-     reminders: [ "Red herring" ],
-     display: "Fortune Teller",
-     effects: [ "each night", "demon finder", "choose" ]
-     team: "townsfolk",
-     ability: "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
-     firstNight: 16,
-     otherNight: 3,
-     standardAmyPosition: 2
-   }
+		 id: "fortuneteller",
+		 image: "https://example.com/fortuneteller.png",
+		 firstNightReminder: "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
+		 otherNightReminder: "The Fortune Teller points to two players. Show the head signal (nod yes, shake no) for whether one of those players is the Demon.",
+		 reminders: [ "Red herring" ],
+		 display: "Fortune Teller",
+		 effects: [ "each night", "demon finder", "choose" ]
+		 team: "townsfolk",
+		 ability: "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+		 firstNight: 16,
+		 otherNight: 3,
+		 standardAmyPosition: 2
+	 }
 */
 
 /* Effects:
-    Ongoing ability
-    Once per game
-    Change character
-    Demon finder
+		Ongoing ability
+		Once per game
+		Change character
+		Demon finder
 		Gain ability
-    Kill
-    Die
-    Choose
-    Start knowing
-    Each night
-    Each night*
-    Trigger
+		Kill
+		Die
+		Choose
+		Start knowing
+		Each night
+		Each night*
+		Trigger
 		Passive
-    Setup ability
+		Setup ability
 */
 
 /* Standard Amy Order:
-     0 Acts on the first night
-     1 Acts every night
-     2 Acts every night (except the first night)
-     3 Acts during the day
-     4 Once per game
-     5 Acts on a trigger OR passive
+		 0 Acts on the first night
+		 1 Acts every night
+		 2 Acts every night (except the first night)
+		 3 Acts during the day
+		 4 Once per game
+		 5 Acts on a trigger OR passive
 */
 
-export const fishbucket = [
-	{
-		"id": "acrobat",
+const searchFishbucket = (charId) => { return fishbucket[normalizeId(charId)] }
+export default searchFishbucket
+
+
+const normalizeId = (id) => {
+	return id.replaceAll(/[_-]/g, "")
+}
+
+
+const fishbucket = {
+	acrobat: {
+		id: "acrobat",
 		"display": "Acrobat",
 		"edition": "",
 		"team": "outsider",
@@ -57,8 +66,8 @@ export const fishbucket = [
 		"ability": "Each night*, if either good living neighbour is drunk or poisoned, you die.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "alchemist",
+	alchemist: {
+		id: "alchemist",
 		"display": "Alchemist",
 		"edition": "",
 		"team": "townsfolk",
@@ -74,8 +83,8 @@ export const fishbucket = [
 		"ability": "You have a not-in-play Minion ability.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "alhadikhia",
+	alhadikhia: {
+		id: "alhadikhia",
 		"display": "Al-Hadikhia",
 		"edition": "",
 		"team": "demon",
@@ -94,8 +103,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "amnesiac",
+	amnesiac: {
+		id: "amnesiac",
 		"display": "Amnesiac",
 		"edition": "",
 		"team": "townsfolk",
@@ -110,8 +119,8 @@ export const fishbucket = [
 		"ability": "You do not know what your ability is. Each day, privately guess what it is: you learn how accurate you are.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "apprentice",
+	apprentice: {
+		id: "apprentice",
 		"display": "Apprentice",
 		"edition": "bmr",
 		"team": "traveler",
@@ -126,8 +135,8 @@ export const fishbucket = [
 		"ability": "On your 1st night, you gain a Townsfolk ability (if good), or a Minion ability (if evil).",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "artist",
+	artist: {
+		id: "artist",
 		"display": "Artist",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -142,8 +151,8 @@ export const fishbucket = [
 		"ability": "Once per game, during the day, privately ask the Storyteller any yes/no question.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "assassin",
+	assassin: {
+		id: "assassin",
 		"display": "Assassin",
 		"edition": "bmr",
 		"team": "minion",
@@ -159,8 +168,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night*, choose a player: they die, even if for some reason they could not.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "atheist",
+	atheist: {
+		id: "atheist",
 		"display": "Atheist",
 		"edition": "",
 		"team": "townsfolk",
@@ -173,8 +182,8 @@ export const fishbucket = [
 		"ability": "The Storyteller can break the game rules & if executed, good wins, even if you are dead. [No evil characters]",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "balloonist",
+	balloonist: {
+		id: "balloonist",
 		"display": "Balloonist",
 		"edition": "",
 		"team": "townsfolk",
@@ -193,8 +202,8 @@ export const fishbucket = [
 		"ability": "Each night, you learn 1 player of each character type, until there are no more types to learn. [+1 Outsider]",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "barber",
+	barber: {
+		id: "barber",
 		"display": "Barber",
 		"edition": "snv",
 		"team": "outsider",
@@ -209,8 +218,8 @@ export const fishbucket = [
 		"ability": "If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "barista",
+	barista: {
+		id: "barista",
 		"display": "Barista",
 		"edition": "snv",
 		"team": "traveler",
@@ -226,8 +235,8 @@ export const fishbucket = [
 		"ability": "Each night, until dusk, 1) a player becomes sober, healthy and gets true info, or 2) their ability works twice. They learn which.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "baron",
+	baron: {
+		id: "baron",
 		"display": "Baron",
 		"edition": "tb",
 		"team": "minion",
@@ -240,8 +249,8 @@ export const fishbucket = [
 		"ability": "There are extra Outsiders in play. [+2 Outsiders]",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "beggar",
+	beggar: {
+		id: "beggar",
 		"display": "Beggar",
 		"edition": "tb",
 		"team": "traveler",
@@ -254,8 +263,8 @@ export const fishbucket = [
 		"ability": "You must use a vote token to vote. Dead players may choose to give you theirs. If so, you learn their alignment. You are sober & healthy.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "bishop",
+	bishop: {
+		id: "bishop",
 		"display": "Bishop",
 		"edition": "bmr",
 		"team": "traveler",
@@ -271,8 +280,8 @@ export const fishbucket = [
 		"ability": "Only the Storyteller can nominate. At least 1 opposite player must be nominated each day.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "bonecollector",
+	bonecollector: {
+		id: "bonecollector",
 		"display": "Bone Collector",
 		"edition": "snv",
 		"team": "traveler",
@@ -288,8 +297,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose a dead player: they regain their ability until dusk.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "boomdandy",
+	boomdandy: {
+		id: "boomdandy",
 		"display": "Boomdandy",
 		"edition": "",
 		"team": "minion",
@@ -302,8 +311,8 @@ export const fishbucket = [
 		"ability": "If you are executed, all but 3 players die. 1 minute later, the player with the most players pointing at them dies.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "bountyhunter",
+	bountyhunter: {
+		id: "bountyhunter",
 		"display": "Bounty Hunter",
 		"edition": "",
 		"team": "townsfolk",
@@ -318,8 +327,8 @@ export const fishbucket = [
 		"ability": "You start knowing 1 evil player. If the player you know dies, you learn another evil player tonight. [1 Townsfolk is evil]",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "bureaucrat",
+	bureaucrat: {
+		id: "bureaucrat",
 		"display": "Bureaucrat",
 		"edition": "tb",
 		"team": "traveler",
@@ -334,8 +343,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "butcher",
+	butcher: {
+		id: "butcher",
 		"display": "Butcher",
 		"edition": "snv",
 		"team": "traveler",
@@ -348,8 +357,8 @@ export const fishbucket = [
 		"ability": "Each day, after the 1st execution, you may nominate again.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "butler",
+	butler: {
+		id: "butler",
 		"display": "Butler",
 		"edition": "tb",
 		"team": "outsider",
@@ -364,8 +373,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "cannibal",
+	cannibal: {
+		id: "cannibal",
 		"display": "Cannibal",
 		"edition": "",
 		"team": "townsfolk",
@@ -381,8 +390,8 @@ export const fishbucket = [
 		"ability": "You have the ability of the recently killed executee. If they are evil, you are poisoned until a good player dies by execution.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "cerenovus",
+	cerenovus: {
+		id: "cerenovus",
 		"display": "Cerenovus",
 		"edition": "snv",
 		"team": "minion",
@@ -397,8 +406,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player & a good character: they are “mad” they are this character tomorrow, or might be executed.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "chambermaid",
+	chambermaid: {
+		id: "chambermaid",
 		"display": "Chambermaid",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -411,8 +420,8 @@ export const fishbucket = [
 		"ability": "Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "chef",
+	chef: {
+		id: "chef",
 		"display": "Chef",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -425,8 +434,8 @@ export const fishbucket = [
 		"ability": "You start knowing how many pairs of evil players there are.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "choirboy",
+	choirboy: {
+		id: "choirboy",
 		"display": "Choirboy",
 		"edition": "",
 		"team": "townsfolk",
@@ -439,8 +448,8 @@ export const fishbucket = [
 		"ability": "If the Demon kills the King, you learn which player is the Demon. [+ the King]",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "clockmaker",
+	clockmaker: {
+		id: "clockmaker",
 		"display": "Clockmaker",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -453,8 +462,8 @@ export const fishbucket = [
 		"ability": "You start knowing how many steps from the Demon to its nearest Minion.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "courtier",
+	courtier: {
+		id: "courtier",
 		"display": "Courtier",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -472,8 +481,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "cultleader",
+	cultleader: {
+		id: "cultleader",
 		"display": "Cult Leader",
 		"edition": "",
 		"team": "townsfolk",
@@ -486,8 +495,8 @@ export const fishbucket = [
 		"ability": "Each night, you become the alignment of an alive neighbour. If all good players choose to join your cult, your team wins.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "damsel",
+	damsel: {
+		id: "damsel",
 		"display": "Damsel",
 		"edition": "",
 		"team": "outsider",
@@ -502,8 +511,8 @@ export const fishbucket = [
 		"ability": "All Minions know you are in play. If a Minion publicly guesses you (once), your team loses.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "deviant",
+	deviant: {
+		id: "deviant",
 		"display": "Deviant",
 		"edition": "snv",
 		"team": "traveler",
@@ -516,8 +525,8 @@ export const fishbucket = [
 		"ability": "If you were funny today, you cannot die by exile.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "devilsadvocate",
+	devilsadvocate: {
+		id: "devilsadvocate",
 		"display": "Devil's Advocate",
 		"edition": "bmr",
 		"team": "minion",
@@ -532,8 +541,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a living player (different to last night): if executed tomorrow, they don't die.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "dreamer",
+	dreamer: {
+		id: "dreamer",
 		"display": "Dreamer",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -546,8 +555,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player (not yourself or Travellers): you learn 1 good and 1 evil character, 1 of which is correct.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "drunk",
+	drunk: {
+		id: "drunk",
 		"display": "Drunk",
 		"edition": "tb",
 		"team": "outsider",
@@ -563,8 +572,8 @@ export const fishbucket = [
 		"ability": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "empath",
+	empath: {
+		id: "empath",
 		"display": "Empath",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -577,8 +586,8 @@ export const fishbucket = [
 		"ability": "Each night, you learn how many of your 2 alive neighbours are evil.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "engineer",
+	engineer: {
+		id: "engineer",
 		"display": "Engineer",
 		"edition": "",
 		"team": "townsfolk",
@@ -593,8 +602,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose which Minions or which Demon is in play.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "eviltwin",
+	eviltwin: {
+		id: "eviltwin",
 		"display": "Evil Twin",
 		"edition": "snv",
 		"team": "minion",
@@ -609,8 +618,8 @@ export const fishbucket = [
 		"ability": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "exorcist",
+	exorcist: {
+		id: "exorcist",
 		"display": "Exorcist",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -625,8 +634,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "fanggu",
+	fanggu: {
+		id: "fanggu",
 		"display": "Fang Gu",
 		"edition": "snv",
 		"team": "demon",
@@ -642,8 +651,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "farmer",
+	farmer: {
+		id: "farmer",
 		"display": "Farmer",
 		"edition": "",
 		"team": "townsfolk",
@@ -656,8 +665,8 @@ export const fishbucket = [
 		"ability": "If you die at night, an alive good player becomes a Farmer.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "fearmonger",
+	fearmonger: {
+		id: "fearmonger",
 		"display": "Fearmonger",
 		"edition": "",
 		"team": "minion",
@@ -672,8 +681,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player. If you nominate & execute them, their team loses. All players know if you choose a new player.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "fisherman",
+	fisherman: {
+		id: "fisherman",
 		"display": "Fisherman",
 		"edition": "",
 		"team": "townsfolk",
@@ -688,8 +697,8 @@ export const fishbucket = [
 		"ability": "Once per game, during the day, visit the Storyteller for some advice to help you win.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "flowergirl",
+	flowergirl: {
+		id: "flowergirl",
 		"display": "Flowergirl",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -705,8 +714,8 @@ export const fishbucket = [
 		"ability": "Each night*, you learn if a Demon voted today.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "fool",
+	fool: {
+		id: "fool",
 		"display": "Fool",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -721,8 +730,8 @@ export const fishbucket = [
 		"ability": "The first time you die, you don't.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "fortune_teller",
+	fortuneteller: {
+		id: "fortuneteller",
 		"display": "Fortune Teller",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -737,8 +746,8 @@ export const fishbucket = [
 		"ability": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "gambler",
+	gambler: {
+		id: "gambler",
 		"display": "Gambler",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -753,8 +762,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player & guess their character: if you guess wrong, you die.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "gangster",
+	gangster: {
+		id: "gangster",
 		"display": "Gangster",
 		"edition": "",
 		"team": "traveler",
@@ -767,8 +776,8 @@ export const fishbucket = [
 		"ability": "Once per day, you may choose to kill an alive neighbour, if your other alive neighbour agrees.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "general",
+	general: {
+		id: "general",
 		"display": "General",
 		"edition": "",
 		"team": "townsfolk",
@@ -781,8 +790,8 @@ export const fishbucket = [
 		"ability": "Each night, you learn which alignment the Storyteller believes is winning: good, evil, or neither.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "goblin",
+	goblin: {
+		id: "goblin",
 		"display": "Goblin",
 		"edition": "",
 		"team": "minion",
@@ -797,8 +806,8 @@ export const fishbucket = [
 		"ability": "If you publicly claim to be the Goblin when nominated & are executed that day, your team wins.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "godfather",
+	godfather: {
+		id: "godfather",
 		"display": "Godfather",
 		"edition": "bmr",
 		"team": "minion",
@@ -814,8 +823,8 @@ export const fishbucket = [
 		"ability": "You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "golem",
+	golem: {
+		id: "golem",
 		"display": "Golem",
 		"edition": "",
 		"team": "outsider",
@@ -830,8 +839,8 @@ export const fishbucket = [
 		"ability": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "goon",
+	goon: {
+		id: "goon",
 		"display": "Goon",
 		"edition": "bmr",
 		"team": "outsider",
@@ -846,8 +855,8 @@ export const fishbucket = [
 		"ability": "Each night, the 1st player to choose you with their ability is drunk until dusk. You become their alignment.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "gossip",
+	gossip: {
+		id: "gossip",
 		"display": "Gossip",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -862,8 +871,8 @@ export const fishbucket = [
 		"ability": "Each day, you may make a public statement. Tonight, if it was true, a player dies.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "grandmother",
+	grandmother: {
+		id: "grandmother",
 		"display": "Grandmother",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -878,8 +887,8 @@ export const fishbucket = [
 		"ability": "You start knowing a good player & their character. If the Demon kills them, you die too.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "gunslinger",
+	gunslinger: {
+		id: "gunslinger",
 		"display": "Gunslinger",
 		"edition": "tb",
 		"team": "traveler",
@@ -892,8 +901,8 @@ export const fishbucket = [
 		"ability": "Each day, after the 1st vote has been tallied, you may choose a player that voted: they die.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "harlot",
+	harlot: {
+		id: "harlot",
 		"display": "Harlot",
 		"edition": "snv",
 		"team": "traveler",
@@ -908,8 +917,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a living player: if they agree, you learn their character, but you both might die.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "heretic",
+	heretic: {
+		id: "heretic",
 		"display": "Heretic",
 		"edition": "",
 		"team": "outsider",
@@ -922,8 +931,8 @@ export const fishbucket = [
 		"ability": "Whoever wins, loses & whoever loses, wins, even if you are dead.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "huntsman",
+	huntsman: {
+		id: "huntsman",
 		"display": "Huntsman",
 		"edition": "",
 		"team": "townsfolk",
@@ -938,8 +947,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "imp",
+	imp: {
+		id: "imp",
 		"display": "Imp",
 		"edition": "tb",
 		"team": "demon",
@@ -954,8 +963,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "innkeeper",
+	innkeeper: {
+		id: "innkeeper",
 		"display": "Innkeeper",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -971,8 +980,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "investigator",
+	investigator: {
+		id: "investigator",
 		"display": "Investigator",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -988,8 +997,8 @@ export const fishbucket = [
 		"ability": "You start knowing that 1 of 2 players is a particular Minion.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "judge",
+	judge: {
+		id: "judge",
 		"display": "Judge",
 		"edition": "bmr",
 		"team": "traveler",
@@ -1004,8 +1013,8 @@ export const fishbucket = [
 		"ability": "Once per game, if another player nominated, you may choose to force the current execution to pass or fail.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "juggler",
+	juggler: {
+		id: "juggler",
 		"display": "Juggler",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1020,8 +1029,8 @@ export const fishbucket = [
 		"ability": "On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "king",
+	king: {
+		id: "king",
 		"display": "King",
 		"edition": "",
 		"team": "townsfolk",
@@ -1034,8 +1043,8 @@ export const fishbucket = [
 		"ability": "Each night, if the dead outnumber the living, you learn 1 alive character. The Demon knows who you are.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "klutz",
+	klutz: {
+		id: "klutz",
 		"display": "Klutz",
 		"edition": "snv",
 		"team": "outsider",
@@ -1048,8 +1057,19 @@ export const fishbucket = [
 		"ability": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "legion",
+	knight: {
+		id: "knight",
+		display: "Knight",
+		edition: "custom",
+		team: "townsfolk",
+		firstNight: 41,
+		reminders: ["Know"],
+		setup: false,
+		ability: "You start knowing two players that are not the demon",
+		standardAmyPosition: 0
+	},
+	legion: {
+		id: "legion",
 		"display": "Legion",
 		"edition": "",
 		"team": "demon",
@@ -1065,8 +1085,8 @@ export const fishbucket = [
 		"ability": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "leviathan",
+	leviathan: {
+		id: "leviathan",
 		"display": "Leviathan",
 		"edition": "",
 		"team": "demon",
@@ -1086,8 +1106,8 @@ export const fishbucket = [
 		"ability": "If more than 1 good player is executed, you win. All players know you are in play. After day 5, evil wins.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "librarian",
+	librarian: {
+		id: "librarian",
 		"display": "Librarian",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1103,8 +1123,8 @@ export const fishbucket = [
 		"ability": "You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "lilmonsta",
+	lilmonsta: {
+		id: "lilmonsta",
 		"display": "Lil' Monsta",
 		"edition": "",
 		"team": "demon",
@@ -1121,8 +1141,8 @@ export const fishbucket = [
 		"ability": "Each night, Minions choose who babysits Lil' Monsta's token & \"is the Demon\". A player dies each night*. [+1 Minion]",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "lleech",
+	lleech: {
+		id: "lleech",
 		"display": "Lleech",
 		"edition": "",
 		"team": "demon",
@@ -1138,8 +1158,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player: they die. You start by choosing an alive player: they are poisoned - you die if & only if they die.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "lunatic",
+	lunatic: {
+		id: "lunatic",
 		"display": "Lunatic",
 		"edition": "bmr",
 		"team": "outsider",
@@ -1156,8 +1176,8 @@ export const fishbucket = [
 		"ability": "You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "lycanthrope",
+	lycanthrope: {
+		id: "lycanthrope",
 		"display": "Lycanthrope",
 		"edition": "",
 		"team": "townsfolk",
@@ -1172,8 +1192,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a living player: if good, they die, but they are the only player that can die tonight.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "magician",
+	magician: {
+		id: "magician",
 		"display": "Magician",
 		"edition": "",
 		"team": "townsfolk",
@@ -1186,8 +1206,8 @@ export const fishbucket = [
 		"ability": "The Demon thinks you are a Minion. Minions think you are a Demon.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "marionette",
+	marionette: {
+		id: "marionette",
 		"display": "Marionette",
 		"edition": "",
 		"team": "minion",
@@ -1203,8 +1223,8 @@ export const fishbucket = [
 		"ability": "You think you are a good character but you are not. The Demon knows who you are. [You neighbour the Demon]",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "mastermind",
+	mastermind: {
+		id: "mastermind",
 		"display": "Mastermind",
 		"edition": "bmr",
 		"team": "minion",
@@ -1217,8 +1237,8 @@ export const fishbucket = [
 		"ability": "If the Demon dies by execution (ending the game), play for 1 more day. If a player is then executed, their team loses.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "mathematician",
+	mathematician: {
+		id: "mathematician",
 		"display": "Mathematician",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1233,8 +1253,8 @@ export const fishbucket = [
 		"ability": "Each night, you learn how many players’ abilities worked abnormally (since dawn) due to another character's ability.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "matron",
+	matron: {
+		id: "matron",
 		"display": "Matron",
 		"edition": "bmr",
 		"team": "traveler",
@@ -1247,8 +1267,8 @@ export const fishbucket = [
 		"ability": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "mayor",
+	mayor: {
+		id: "mayor",
 		"display": "Mayor",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1261,8 +1281,8 @@ export const fishbucket = [
 		"ability": "If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "mephit",
+	mephit: {
+		id: "mephit",
 		"display": "Mephit",
 		"edition": "",
 		"team": "minion",
@@ -1278,8 +1298,8 @@ export const fishbucket = [
 		"ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "mezepheles",
+	mezepheles: {
+		id: "mezepheles",
 		"display": "Mezepheles",
 		"edition": "",
 		"team": "minion",
@@ -1295,8 +1315,8 @@ export const fishbucket = [
 		"ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "minstrel",
+	minstrel: {
+		id: "minstrel",
 		"display": "Minstrel",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -1311,8 +1331,8 @@ export const fishbucket = [
 		"ability": "When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "monk",
+	monk: {
+		id: "monk",
 		"display": "Monk",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1327,8 +1347,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player (not yourself): they are safe from the Demon tonight.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "moonchild",
+	moonchild: {
+		id: "moonchild",
 		"display": "Moonchild",
 		"edition": "bmr",
 		"team": "outsider",
@@ -1343,8 +1363,8 @@ export const fishbucket = [
 		"ability": "When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "mutant",
+	mutant: {
+		id: "mutant",
 		"display": "Mutant",
 		"edition": "snv",
 		"team": "outsider",
@@ -1357,8 +1377,8 @@ export const fishbucket = [
 		"ability": "If you are “mad” about being an Outsider, you might be executed.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "nightwatchman",
+	nightwatchman: {
+		id: "nightwatchman",
 		"display": "Nightwatchman",
 		"edition": "",
 		"team": "townsfolk",
@@ -1373,8 +1393,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose a player: they learn who you are.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "noble",
+	noble: {
+		id: "noble",
 		"display": "Noble",
 		"edition": "",
 		"team": "townsfolk",
@@ -1389,8 +1409,8 @@ export const fishbucket = [
 		"ability": "You start knowing 3 players, 1 and only 1 of which is evil.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "nodashii",
+	nodashii: {
+		id: "nodashii",
 		"display": "No Dashii",
 		"edition": "snv",
 		"team": "demon",
@@ -1406,8 +1426,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player: they die. Your 2 Townsfolk neighbours are poisoned.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "oracle",
+	oracle: {
+		id: "oracle",
 		"display": "Oracle",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1420,8 +1440,8 @@ export const fishbucket = [
 		"ability": "Each night*, you learn how many dead players are evil.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "pacifist",
+	pacifist: {
+		id: "pacifist",
 		"display": "Pacifist",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -1434,8 +1454,8 @@ export const fishbucket = [
 		"ability": "Executed good players might not die.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "philosopher",
+	philosopher: {
+		id: "philosopher",
 		"display": "Philosopher",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1451,8 +1471,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "pithag",
+	pithag: {
+		id: "pithag",
 		"display": "Pit-Hag",
 		"edition": "snv",
 		"team": "minion",
@@ -1465,8 +1485,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player & a character they become (if not-in-play). If a Demon is made, deaths tonight are arbitrary.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "pixie",
+	pixie: {
+		id: "pixie",
 		"display": "Pixie",
 		"edition": "",
 		"team": "townsfolk",
@@ -1482,8 +1502,8 @@ export const fishbucket = [
 		"ability": "You start knowing 1 in-play Townsfolk. If you were mad that you were this character, you gain their ability when they die.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "po",
+	po: {
+		id: "po",
 		"display": "Po",
 		"edition": "bmr",
 		"team": "demon",
@@ -1499,8 +1519,8 @@ export const fishbucket = [
 		"ability": "Each night*, you may choose a player: they die. If your last choice was no-one, choose 3 players tonight.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "poisoner",
+	poisoner: {
+		id: "poisoner",
 		"display": "Poisoner",
 		"edition": "tb",
 		"team": "minion",
@@ -1515,8 +1535,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player: they are poisoned tonight and tomorrow day.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "politician",
+	politician: {
+		id: "politician",
 		"display": "Politician",
 		"edition": "",
 		"team": "outsider",
@@ -1529,8 +1549,8 @@ export const fishbucket = [
 		"ability": "If you were the player most responsible for your team losing, you change alignment & win, even if dead.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "poppygrower",
+	poppygrower: {
+		id: "poppygrower",
 		"display": "Poppy Grower",
 		"edition": "",
 		"team": "townsfolk",
@@ -1545,8 +1565,8 @@ export const fishbucket = [
 		"ability": "Minions & Demons do not know each other. If you die, they learn who each other are that night.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "preacher",
+	preacher: {
+		id: "preacher",
 		"display": "Preacher",
 		"edition": "",
 		"team": "townsfolk",
@@ -1561,8 +1581,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "professor",
+	professor: {
+		id: "professor",
 		"display": "Professor",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -1578,8 +1598,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "psychopath",
+	psychopath: {
+		id: "psychopath",
 		"display": "Psychopath",
 		"edition": "",
 		"team": "minion",
@@ -1592,8 +1612,8 @@ export const fishbucket = [
 		"ability": "Each day, before nominations, you may publicly choose a player: they die. If executed, you only die if you lose roshambo.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "pukka",
+	pukka: {
+		id: "pukka",
 		"display": "Pukka",
 		"edition": "bmr",
 		"team": "demon",
@@ -1609,8 +1629,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "puzzlemaster",
+	puzzlemaster: {
+		id: "puzzlemaster",
 		"display": "Puzzlemaster",
 		"edition": "",
 		"team": "outsider",
@@ -1626,8 +1646,8 @@ export const fishbucket = [
 		"ability": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "ravenkeeper",
+	ravenkeeper: {
+		id: "ravenkeeper",
 		"display": "Ravenkeeper",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1640,8 +1660,8 @@ export const fishbucket = [
 		"ability": "If you die at night, you are woken to choose a player: you learn their character.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "recluse",
+	recluse: {
+		id: "recluse",
 		"display": "Recluse",
 		"edition": "tb",
 		"team": "outsider",
@@ -1654,8 +1674,8 @@ export const fishbucket = [
 		"ability": "You might register as evil & as a Minion or Demon, even if dead.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "riot",
+	riot: {
+		id: "riot",
 		"display": "Riot",
 		"edition": "",
 		"team": "demon",
@@ -1668,8 +1688,8 @@ export const fishbucket = [
 		"ability": "Nominees die, but may nominate again immediately (on day 3, they must). After day 3, evil wins. [All Minions are Riot]",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "sage",
+	sage: {
+		id: "sage",
 		"display": "Sage",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1682,8 +1702,8 @@ export const fishbucket = [
 		"ability": "If the Demon kills you, you learn that it is 1 of 2 players.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "sailor",
+	sailor: {
+		id: "sailor",
 		"display": "Sailor",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -1698,8 +1718,8 @@ export const fishbucket = [
 		"ability": "Each night, choose an alive player: either you or they are drunk until dusk. You can't die.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "saint",
+	saint: {
+		id: "saint",
 		"display": "Saint",
 		"edition": "tb",
 		"team": "outsider",
@@ -1712,8 +1732,8 @@ export const fishbucket = [
 		"ability": "If you die by execution, your team loses.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "savant",
+	savant: {
+		id: "savant",
 		"display": "Savant",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1726,8 +1746,8 @@ export const fishbucket = [
 		"ability": "Each day, you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false.",
 		"standardAmyPosition": 3
 	},
-	{
-		"id": "scapegoat",
+	scapegoat: {
+		id: "scapegoat",
 		"display": "Scapegoat",
 		"edition": "tb",
 		"team": "traveler",
@@ -1740,8 +1760,8 @@ export const fishbucket = [
 		"ability": "If a player of your alignment is executed, you might be executed instead.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "scarletwoman",
+	scarletwoman: {
+		id: "scarletwoman",
 		"display": "Scarlet Woman",
 		"edition": "tb",
 		"team": "minion",
@@ -1756,8 +1776,8 @@ export const fishbucket = [
 		"ability": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don’t count)",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "seamstress",
+	seamstress: {
+		id: "seamstress",
 		"display": "Seamstress",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1772,8 +1792,8 @@ export const fishbucket = [
 		"ability": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "shabaloth",
+	shabaloth: {
+		id: "shabaloth",
 		"display": "Shabaloth",
 		"edition": "bmr",
 		"team": "demon",
@@ -1789,8 +1809,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "slayer",
+	slayer: {
+		id: "slayer",
 		"display": "Slayer",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1805,8 +1825,8 @@ export const fishbucket = [
 		"ability": "Once per game, during the day, publicly choose a player: if they are the Demon, they die.",
 		"standardAmyPosition": 4
 	},
-	{
-		"id": "snakecharmer",
+	snakecharmer: {
+		id: "snakecharmer",
 		"display": "Snake Charmer",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1821,24 +1841,8 @@ export const fishbucket = [
 		"ability": "Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "snake_charmer",
-		"display": "Snake Charmer",
-		"edition": "snv",
-		"team": "townsfolk",
-		"firstNight": 20,
-		"firstNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
-		"otherNight": 11,
-		"otherNightReminder": "The Snake Charmer points to a player. If that player is the Demon: swap the Demon and Snake Charmer character and alignments. Wake each player to inform them of their new role and alignment. The new Snake Charmer is poisoned.",
-		"reminders": [
-			"Poisoned"
-		],
-		"setup": false,
-		"ability": "Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.",
-		"standardAmyPosition": 1
-	},
-	{
-		"id": "snitch",
+	snitch: {
+		id: "snitch",
 		"display": "Snitch",
 		"edition": "",
 		"team": "outsider",
@@ -1851,8 +1855,8 @@ export const fishbucket = [
 		"ability": "Minions start knowing 3 not-in-play characters.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "soldier",
+	soldier: {
+		id: "soldier",
 		"display": "Soldier",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1865,8 +1869,8 @@ export const fishbucket = [
 		"ability": "You are safe from the Demon.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "spy",
+	spy: {
+		id: "spy",
 		"display": "Spy",
 		"edition": "tb",
 		"team": "minion",
@@ -1879,8 +1883,8 @@ export const fishbucket = [
 		"ability": "Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "sweetheart",
+	sweetheart: {
+		id: "sweetheart",
 		"display": "Sweetheart",
 		"edition": "snv",
 		"team": "outsider",
@@ -1895,8 +1899,8 @@ export const fishbucket = [
 		"ability": "When you die, 1 player is drunk from now on.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "tealady",
+	tealady: {
+		id: "tealady",
 		"display": "Tea Lady",
 		"edition": "bmr",
 		"team": "townsfolk",
@@ -1911,8 +1915,8 @@ export const fishbucket = [
 		"ability": "If both your alive neighbours are good, they can't die.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "thief",
+	thief: {
+		id: "thief",
 		"display": "Thief",
 		"edition": "tb",
 		"team": "traveler",
@@ -1927,8 +1931,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player (not yourself): their vote counts negatively tomorrow.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "tinker",
+	tinker: {
+		id: "tinker",
 		"display": "Tinker",
 		"edition": "bmr",
 		"team": "outsider",
@@ -1943,8 +1947,8 @@ export const fishbucket = [
 		"ability": "You might die at any time.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "towncrier",
+	towncrier: {
+		id: "towncrier",
 		"display": "Town Crier",
 		"edition": "snv",
 		"team": "townsfolk",
@@ -1960,8 +1964,8 @@ export const fishbucket = [
 		"ability": "Each night*, you learn if a Minion nominated today.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "undertaker",
+	undertaker: {
+		id: "undertaker",
 		"display": "Undertaker",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -1976,19 +1980,19 @@ export const fishbucket = [
 		"ability": "Each night*, you learn which character died by execution today.",
 		"standardAmyPosition": 2
 	},
-	{
-    "id": "ojo",
+	ojo: {
+		id: "ojo",
 		"display": "Ojo",
 		"team": "demon",
 		"ability": "Each night*, choose a character: they die. If they are not in play, the Storyteller chooses who dies."
 	},
-	{
-    "id": "village_idiot",
+	villageidiot: {
+		id: "villageidiot",
 		"display": "Village Idiot",
 		"team": "townsfolk"
 	},
-	{
-		"id": "vigormortis",
+	vigormortis: {
+		id: "vigormortis",
 		"display": "Vigormortis",
 		"edition": "snv",
 		"team": "demon",
@@ -2005,8 +2009,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbour. [−1 Outsider]",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "virgin",
+	virgin: {
+		id: "virgin",
 		"display": "Virgin",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -2021,8 +2025,8 @@ export const fishbucket = [
 		"ability": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "vortox",
+	vortox: {
+		id: "vortox",
 		"display": "Vortox",
 		"edition": "snv",
 		"team": "demon",
@@ -2037,8 +2041,8 @@ export const fishbucket = [
 		"ability": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins.",
 		"standardAmyPosition": 2
 	},
-	{
-		"id": "voudon",
+	voudon: {
+		id: "voudon",
 		"display": "Voudon",
 		"edition": "bmr",
 		"team": "traveler",
@@ -2051,8 +2055,8 @@ export const fishbucket = [
 		"ability": "Only you and the dead can vote. They don't need a vote token to do so. A 50% majority is not required.",
 		"standardAmyPosition": 5
 	},
-	{
-		"id": "washerwoman",
+	washerwoman: {
+		id: "washerwoman",
 		"display": "Washerwoman",
 		"edition": "tb",
 		"team": "townsfolk",
@@ -2068,8 +2072,8 @@ export const fishbucket = [
 		"ability": "You start knowing that 1 of 2 players is a particular Townsfolk.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "widow",
+	widow: {
+		id: "widow",
 		"display": "Widow",
 		"edition": "",
 		"team": "minion",
@@ -2087,8 +2091,8 @@ export const fishbucket = [
 		"ability": "On your 1st night, look at the Grimoire and choose a player: they are poisoned. 1 good player knows a Widow is in play.",
 		"standardAmyPosition": 0
 	},
-	{
-		"id": "witch",
+	witch: {
+		id: "witch",
 		"display": "Witch",
 		"edition": "snv",
 		"team": "minion",
@@ -2103,8 +2107,8 @@ export const fishbucket = [
 		"ability": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability.",
 		"standardAmyPosition": 1
 	},
-	{
-		"id": "zombuul",
+	zombuul: {
+		id: "zombuul",
 		"display": "Zombuul",
 		"edition": "bmr",
 		"team": "demon",
@@ -2120,111 +2124,111 @@ export const fishbucket = [
 		"ability": "Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead.",
 		"standardAmyPosition": 2
 	},
-	{
-    "id": "doomsayer",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/doomsayer.png",
-    "display": "Doomsayer",
-    "team": "fabled",
-    "ability": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies."
-  },
-  {
-    "id": "angel",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/angel.png",
-    "reminders": ["Protect", "Something Bad"],
-    "display": "Angel",
-    "team": "fabled",
-    "ability": "Something bad might happen to whoever is most responsible for the death of a new player."
-  },
-  {
-    "id": "buddhist",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/buddhist.png",
-    "display": "Buddhist",
-    "team": "fabled",
-    "ability": "For the first 2 minutes of each day, veteran players may not talk."
-  },
-  {
-    "id": "hellslibrarian",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/hellslibrarian.png",
-    "reminders": ["Something Bad"],
-    "display": "Hell's Librarian",
-    "team": "fabled",
-    "ability": "Something bad might happen to whoever talks when the Storyteller has asked for silence."
-  },
-  {
-    "id": "revolutionary",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/revolutionary.png",
-    "reminders": ["Used"],
-    "display": "Revolutionary",
-    "team": "fabled",
-    "ability": "2 neighboring players are known to be the same alignment. Once per game, one of them registers falsely."
-  },
-  {
-    "id": "fiddler",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/fiddler.png",
-    "display": "Fiddler",
-    "team": "fabled",
-    "ability": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win."
-  },
-  {
-    "id": "toymaker",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/toymaker.png",
-    "otherNightReminder": "If it is a night when a Demon attack could end the game, and the Demon is marked \u201cFinal night: No Attack,\u201d then the Demon does not act tonight. (Do not wake them.)",
-    "reminders": ["Final Night: No Attack"],
-    "display": "Toymaker",
-    "team": "fabled",
-    "ability": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
-    "otherNight": 2
-  },
-  {
-    "id": "fibbin",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/fibbin.png",
-    "reminders": ["Used"],
-    "display": "Fibbin",
-    "team": "fabled",
-    "ability": "Once per game, 1 good player might get false information."
-  },
-  {
-    "id": "duchess",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/duchess.png",
-    "otherNightReminder": "Wake each player marked \u201cVisitor\u201d or \u201cFalse Info\u201d one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked \u201cVisitor\u201d or, if you are waking the player marked \u201cFalse Info,\u201d show them any number of fingers except the number of evil players marked \u201cVisitor.\u201d",
-    "reminders": ["Visitor",
-      "False Info"],
-    "display": "Duchess",
-    "team": "fabled",
-    "ability": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
-    "otherNight": 3
-  },
-  {
-    "id": "sentinel",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/sentinel.png",
-    "setup": true,
-    "display": "Sentinel",
-    "team": "fabled",
-    "ability": "There might be 1 extra or 1 fewer Outsider in play."
-  },
-	{
-    "id": "spiritofivory",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/spiritofivory.png",
-    "reminders": ["No extra evil"],
-    "display": "Spirit of Ivory",
-    "team": "fabled",
-    "ability": "There can't be more than 1 extra evil player."
-  },
-	{
-    "id": "djinn",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/djinn.png",
-    "display": "Djinn",
-    "team": "fabled",
-    "ability": "Use the Djinn's special rule. All players know what it is."
-  },
-	{
-    "id": "stormcatcher",
-    "image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/stormcatcher.png",
-    "firstNightReminder": "Mark a good player as \"Safe\". Wake each evil player and show them the marked player.",
-    "reminders": ["Safe"],
-    "display": "Storm Catcher",
-    "team": "fabled",
-    "ability": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
-    "firstNight": 11
-  }
-]
+	doomsayer: {
+		id: "doomsayer",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/doomsayer.png",
+		"display": "Doomsayer",
+		"team": "fabled",
+		"ability": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies."
+	},
+	angel: {
+		id: "angel",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/angel.png",
+		"reminders": ["Protect", "Something Bad"],
+		"display": "Angel",
+		"team": "fabled",
+		"ability": "Something bad might happen to whoever is most responsible for the death of a new player."
+	},
+	buddhist: {
+		id: "buddhist",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/buddhist.png",
+		"display": "Buddhist",
+		"team": "fabled",
+		"ability": "For the first 2 minutes of each day, veteran players may not talk."
+	},
+	hellslibrarian: {
+		id: "hellslibrarian",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/hellslibrarian.png",
+		"reminders": ["Something Bad"],
+		"display": "Hell's Librarian",
+		"team": "fabled",
+		"ability": "Something bad might happen to whoever talks when the Storyteller has asked for silence."
+	},
+	revolutionary: {
+		id: "revolutionary",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/revolutionary.png",
+		"reminders": ["Used"],
+		"display": "Revolutionary",
+		"team": "fabled",
+		"ability": "2 neighboring players are known to be the same alignment. Once per game, one of them registers falsely."
+	},
+	fiddler: {
+		id: "fiddler",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/fiddler.png",
+		"display": "Fiddler",
+		"team": "fabled",
+		"ability": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win."
+	},
+	toymaker: {
+		id: "toymaker",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/toymaker.png",
+		"otherNightReminder": "If it is a night when a Demon attack could end the game, and the Demon is marked \u201cFinal night: No Attack,\u201d then the Demon does not act tonight. (Do not wake them.)",
+		"reminders": ["Final Night: No Attack"],
+		"display": "Toymaker",
+		"team": "fabled",
+		"ability": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
+		"otherNight": 2
+	},
+	fibbin: {
+		id: "fibbin",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/fibbin.png",
+		"reminders": ["Used"],
+		"display": "Fibbin",
+		"team": "fabled",
+		"ability": "Once per game, 1 good player might get false information."
+	},
+	duchess: {
+		id: "duchess",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/duchess.png",
+		"otherNightReminder": "Wake each player marked \u201cVisitor\u201d or \u201cFalse Info\u201d one at a time. Show them the Duchess token, then fingers (1, 2, 3) equaling the number of evil players marked \u201cVisitor\u201d or, if you are waking the player marked \u201cFalse Info,\u201d show them any number of fingers except the number of evil players marked \u201cVisitor.\u201d",
+		"reminders": ["Visitor",
+			"False Info"],
+		"display": "Duchess",
+		"team": "fabled",
+		"ability": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
+		"otherNight": 3
+	},
+	sentinel: {
+		id: "sentinel",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/sentinel.png",
+		"setup": true,
+		"display": "Sentinel",
+		"team": "fabled",
+		"ability": "There might be 1 extra or 1 fewer Outsider in play."
+	},
+	spiritofivory: {
+		id: "spiritofivory",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/spiritofivory.png",
+		"reminders": ["No extra evil"],
+		"display": "Spirit of Ivory",
+		"team": "fabled",
+		"ability": "There can't be more than 1 extra evil player."
+	},
+	djinn: {
+		id: "djinn",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/djinn.png",
+		"display": "Djinn",
+		"team": "fabled",
+		"ability": "Use the Djinn's special rule. All players know what it is."
+	},
+	stormcatcher: {
+		id: "stormcatcher",
+		"image": "https://www.bloodstar.xyz/p/OccamBlazzer/fabled/stormcatcher.png",
+		"firstNightReminder": "Mark a good player as \"Safe\". Wake each evil player and show them the marked player.",
+		"reminders": ["Safe"],
+		"display": "Storm Catcher",
+		"team": "fabled",
+		"ability": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
+		"firstNight": 11
+	}
+}

@@ -6,6 +6,8 @@ import { usePeriod } from "./PeriodProvider"
 import { useScript } from "./ScriptProvider"
 import { useParticipants } from "./ParticipantsProvider"
 import Participant from "./Participant"
+import { logDebug } from "../util/logger"
+const debug = logDebug({identifier: "HistoryEntry"})
 
 export default function HistoryEntry({entry, formatting}) {
   const period = usePeriod()
@@ -36,7 +38,7 @@ export default function HistoryEntry({entry, formatting}) {
             break
           }
           case mentionTypes.character: {
-            const character = script.characters.filter( (e) => { return e.id === match.groups.id })[0]
+            const character = script.characters[match.groups.id]
             if( character !== undefined ) {
               result.push({type: mentionTypes.character, entry: character})
             }
@@ -62,7 +64,7 @@ export default function HistoryEntry({entry, formatting}) {
 
 
   const renderEntry = (text) => {
-        return historyLexer(text.markup).map( (token) => {
+    return historyLexer(text.markup).map( (token) => {
       switch(token.type) {
         case mentionTypes.character: {
           return <Character key={token.entry.id} character={token.entry} includeTooltip={false} />

@@ -29,6 +29,16 @@ export default function CommandLine() {
   const period = usePeriod()
   const script = useScript()
 
+  const autocompleteForCharacters = useMemo(
+    () => {
+      return Object.values(script.characters).map( (character) => {
+        return Object.assign( {type: "character"}, character )
+    })
+    },
+    [script.characters]
+  )
+
+
   const autocompleteForParticipants = useMemo(
     () => {
       return participants.participants.map( (participant, id) => {
@@ -85,7 +95,7 @@ export default function CommandLine() {
       />
       <Mention
         appendSpaceOnAdd={true}
-        data={script.characters}
+        data={autocompleteForCharacters}
         markup={historyMarkup.markupFor(mentionTypes.character)}
         trigger=":"
       />
