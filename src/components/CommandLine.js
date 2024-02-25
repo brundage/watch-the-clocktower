@@ -1,13 +1,17 @@
 import React, { useMemo, useState } from "react";
+// https://stackblitz.com/edit/react-mentions?file=index.js
 import { MentionsInput, Mention } from 'react-mentions'
 import { useScript } from './ScriptProvider'
 import { useParticipants, roles } from './ParticipantsProvider'
 import { actions, useHistoryDispatch } from './HistoryProvider'
 import { usePeriod } from './PeriodProvider'
+import commandLexer from "../util/commandLexer"
 
-// https://stackblitz.com/edit/react-mentions?file=index.js
+import { logDebug } from "../util/logger"
+const debug = logDebug({identifier: "CommandLine"})
 
-export const historyMarkup = {
+
+export const commandMarkup = {
   regexp: /{{(?<role>[^|]+)\|\|(?<id>[^|]+)\|\|(?<display>[^|]+)}}/,
   withPrecap: /^(?<pre>[^{]*){{(?<role>[^|]+)\|\|(?<id>[^|]+)\|\|(?<display>[^|]+)}}/,
   markupFor: (role) => { return "{{" + role + "||__id__||__display__}}" }
@@ -54,18 +58,23 @@ export default function CommandLine() {
   }
 
 
-  const handleCommands = () => {
-    const regexp = new RegExp( historyMarkup.regexp.source, "g" )
-    const entered = [...command.markup.matchAll(regexp)].filter( (m) => { return m[1] === mentionTypes.command } )
-  }
+  // const handleCommands = () => {
+  //   const regexp = new RegExp( commandMarkup.regexp.source, "g" )
+  //   const entered = [...command.markup.matchAll(regexp)].filter( (m) => { return m[1] === mentionTypes.command } )
+  //   debug(entered)
+  // }
 
 
   const handleSubmit = (e, historyDispatch) => {
-    handleCommands()
+    // handleCommands()
     e.preventDefault()
     if( command.markup.length > 0 ) {
+      const message = commandLexer({ markup: command.markup,
+                                     script: script,
+                                     participants: participants
+                                  })
       historyDispatch({ type: actions.append,
-                        entry: Object.assign({ period: period }, command)
+                        entry: { message: message, period: period }
                      })
       setCommand(initialCommand)
     }
@@ -90,19 +99,19 @@ export default function CommandLine() {
       <Mention
         appendSpaceOnAdd={true}
         data={autocompleteForParticipants}
-        markup={historyMarkup.markupFor(mentionTypes.participant)}
+        markup={commandMarkup.markupFor(mentionTypes.participant)}
         trigger="@"
       />
       <Mention
         appendSpaceOnAdd={true}
         data={autocompleteForCharacters}
-        markup={historyMarkup.markupFor(mentionTypes.character)}
+        markup={commandMarkup.markupFor(mentionTypes.character)}
         trigger=":"
       />
       <Mention
         appendSpaceOnAdd={true}
         data={commands}
-        markup={historyMarkup.markupFor(mentionTypes.command)}
+        markup={commandMarkup.markupFor(mentionTypes.command)}
         trigger="/"
       />
       </MentionsInput>

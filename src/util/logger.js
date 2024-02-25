@@ -23,7 +23,7 @@ const logWarn = (config) => {
   return logWith({...config, level: WARN})
 }
 
-const logError= (config) => {
+const logError = (config) => {
   return logWith({...config, level: ERROR})
 }
 

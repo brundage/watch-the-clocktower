@@ -3,11 +3,15 @@ import { actions, useHistory, useHistoryDispatch } from './HistoryProvider'
 import useConfirmDialog from "./ConfirmDialog"
 import HistoryEntry from './HistoryEntry'
 
+// import { logDebug } from "../util/logger"
+// const debug = logDebug({ identifier: "HistoryPanel"})
+
 
 export default function HistoryPanel({formatting}) {
   const history = useHistory()
   const dispatch = useHistoryDispatch()
   const confirmClear = useConfirmDialog()
+
   function display(entry) {
     return( <li key={entry.id}><HistoryEntry entry={entry} formatting={formatting} /></li> )
   }
