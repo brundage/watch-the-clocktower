@@ -8,6 +8,7 @@ import { logDebug } from "../util/logger"
 const debug = logDebug({identifier: "HistoryProvider"})
 
 export const actions = { append: "append", clear: "clear" }
+export const types = { error: "error", humanEntry: "humanEntry" }
 
 const HistoryContext = createContext(null)
 const HistoryDispatchContext = createContext(null)
@@ -52,7 +53,7 @@ function loadInitialHistory(defaultValue) {
 function historyReducer(history, action) {
   switch (action.type) {
     case actions.append: {
-      return [...history, Object.assign({ id: Date.now() }, action.entry )]
+      return [...history, Object.assign({ id: Date.now(), type: types.humanEntry }, action.entry )]
     }
     case actions.clear: {
       return []

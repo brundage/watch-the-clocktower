@@ -10,7 +10,7 @@ const commandLexer = (config) => {
   const participants = config.participants
   const script       = config.script
 
-  if (!commandMarkup.withPrecap.test(markup)) { return [{ type: "string", entry: markup }] }
+  if (!commandMarkup.withPrecap.test(markup)) { return [{ type: mentionTypes.string, entry: markup }] }
 
   let match
   const result = []
@@ -19,7 +19,7 @@ const commandLexer = (config) => {
     match = markup.match(commandMarkup.withPrecap)
     if (match) {
       if (match.groups.pre.length > 0) {
-        result.push({ type: "string", entry: match.groups.pre })
+        result.push({ type: mentionTypes.string, entry: match.groups.pre })
       }
 
       switch (match.groups.role) {
@@ -40,13 +40,13 @@ const commandLexer = (config) => {
           break
         }
         default: {
-          result.push({ type: "string", entry: match.groups.display })
+          result.push({ type: mentionTypes.string, entry: match.groups.display })
         }
       }
       markup = markup.replace(match[0], "")
 
     } else {
-      result.push({ type: "string", entry: markup })
+      result.push({ type: mentionTypes.string, entry: markup })
       markup = ""
     }
   }

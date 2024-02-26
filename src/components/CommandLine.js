@@ -2,10 +2,11 @@ import React, { useMemo, useState } from "react";
 // https://stackblitz.com/edit/react-mentions?file=index.js
 import { MentionsInput, Mention } from 'react-mentions'
 import { useScript } from './ScriptProvider'
-import { useParticipants, roles } from './ParticipantsProvider'
-import { actions, useHistoryDispatch } from './HistoryProvider'
+import { actions as participantsActions, useParticipants, useParticipantsDispatch } from './ParticipantsProvider'
+import { actions as historyActions, useHistoryDispatch } from './HistoryProvider'
 import { usePeriod } from './PeriodProvider'
 import commandLexer from "../util/commandLexer"
+import commandParser from "../util/commandParser"
 
 import { logDebug } from "../util/logger"
 const debug = logDebug({identifier: "CommandLine"})
@@ -21,7 +22,8 @@ export const commandMarkup = {
 export const mentionTypes = {
   character: "character",
   command: "command",
-  participant: "participant"
+  participant: "participant",
+  string: "string"
 }
 
 
@@ -30,6 +32,7 @@ export default function CommandLine() {
   const [ command, setCommand ] = useState(initialCommand)
   const historyDispatch = useHistoryDispatch()
   const participants = useParticipants()
+  const participantsDispatch = useParticipantsDispatch()
   const period = usePeriod()
   const script = useScript()
 
@@ -53,27 +56,29 @@ export default function CommandLine() {
   )
 
 
-  const handleChange = (event, newValue, newPlainTextValue, mentions) => {
+  const handleChange = (e, newValue, newPlainTextValue, mentions) => {
     setCommand({ markup: newValue, plainText: newPlainTextValue, mentions: mentions})
   }
 
 
-  // const handleCommands = () => {
-  //   const regexp = new RegExp( commandMarkup.regexp.source, "g" )
-  //   const entered = [...command.markup.matchAll(regexp)].filter( (m) => { return m[1] === mentionTypes.command } )
-  //   debug(entered)
-  // }
+  const handleCommand = (command) => {
+    debug("handling command:", command)
+    const entry = commands.find((cmd) => { return cmd.id === command.operation.entry.display })
+    if( entry !== undefined ) {
+      entry.callback(command)
+    }
 
+  }
 
   const handleSubmit = (e, historyDispatch) => {
-    // handleCommands()
     e.preventDefault()
     if( command.markup.length > 0 ) {
       const message = commandLexer({ markup: command.markup,
                                      script: script,
                                      participants: participants
                                   })
-      historyDispatch({ type: actions.append,
+      handleCommand(commandParser(message))
+      historyDispatch({ type: historyActions.append,
                         entry: { message: message, period: period }
                      })
       setCommand(initialCommand)
@@ -81,8 +86,13 @@ export default function CommandLine() {
   }
 
  
-  const claim = () => {
-
+  const claim = (command) => {
+debug("claims", command)
+    debug(command.left.entry.display, "claims", command.right.entry.display)
+    participantsDispatch({ type: participantsActions.edit,
+                           id: command.left.entry.id,
+                           changes: { token: command.right.entry.id }
+                        })
   }
 
 

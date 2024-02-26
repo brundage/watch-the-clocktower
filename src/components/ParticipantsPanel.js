@@ -45,7 +45,7 @@ export default function PlayersPanel() {
     if( participant === undefined ) { throw Error("participant with id " + participantId + " not found") }
     return (<li key={participantId}>
               <EditableField value={participant.display} id={participantId} onSubmit={handleSubmit}>
-                <Participant id={participantId} participant={participant} />
+                <Participant participant={participant} />
               </EditableField>
               <button onClick={(e) => removeParticipant(e,participantId)}>X</button>
             </li>);

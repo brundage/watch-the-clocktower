@@ -3,9 +3,9 @@ import { useScript, useScriptDispatch } from "./ScriptProvider"
 import JSONLoader from './JsonLoader'
 import CharacterCard from './CharacterCard'
 import { actions } from "./ScriptProvider"
-import { logDebug } from "../util/logger"
 
-const debug = logDebug({identifier: "ScriptPanel"})
+// import { logDebug } from "../util/logger"
+// const debug = logDebug({identifier: "ScriptPanel"})
 
 const defaultShowTeams = {
   townsfolk: true,
@@ -38,8 +38,7 @@ export default function ScriptPanel() {
 
 
   function display(entry) {
-    const key = "script-" + entry.id
-    return (<li key={key}><CharacterCard character={entry} /></li>);
+    return (<li key={"character-" + entry.id}><CharacterCard character={entry} /></li>);
   }
 
 
@@ -59,9 +58,10 @@ export default function ScriptPanel() {
 
   const teams = Object.keys(showTeams).map( (t) => {
     const teamId = "team-" + t
-    return(<label>
-      <input onChange={handeShowTeamCheckbox} key={teamId} value={t} id={teamId} type="checkbox" checked={showTeams[t]} /> {t}
-      </label>
+    return(
+        <label key={teamId}>
+          <input onChange={handeShowTeamCheckbox} value={t} id={teamId} type="checkbox" checked={showTeams[t]} /> {t}
+        </label>
     )
   })
 

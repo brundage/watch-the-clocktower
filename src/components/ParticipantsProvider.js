@@ -5,6 +5,9 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import defaultParticipants from '../data/default_participants'
 
+import { logDebug } from "../util/logger"
+const debug = logDebug({identifier: "ParticipantsProvider"})
+
 const actions = { add: "add", changed: "changed", edit: "edit", remove: "remove" }
 export { actions }
 
@@ -76,7 +79,7 @@ function participantsReducer(participants, action) {
       return action.id
     }
     case actions.edit: {
-      return({
+      return {
         participants: participants.participants.map( (participant, i) => {
           if( i === action.id ) {
             return Object.assign({}, participant, action.changes )
@@ -86,7 +89,7 @@ function participantsReducer(participants, action) {
         }),
         townSquare: participants.townSquare,
         storytellers: participants.storytellers
-      })
+      }
     }
     case actions.remove: {
       return({

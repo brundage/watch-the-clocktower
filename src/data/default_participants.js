@@ -1,11 +1,11 @@
 const defaultParticipants = {
   participants: [
-    { display: "Occam Blazer" },
-    { display: "Hungry"       },
-    { display: "Monika"       },
-    { display: "Etreides"     },
-    { display: "Ongaku"       },
-    { display: "Patters"      }
+    { display: "Occam Blazer", id: 0 },
+    { display: "Hungry",       id: 1 },
+    { display: "Monika",       id: 2 },
+    { display: "Etreides",     id: 3 },
+    { display: "Ongaku",       id: 4 },
+    { display: "Patters",      id: 5 }
   ],
 
   townSquare:   [ 2, 1, 4, 0, 3 ],

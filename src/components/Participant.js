@@ -10,9 +10,9 @@ import React, { useState } from "react"
   }
 */
 
-export default function Participant({id, participant}) {
+export default function Participant({participant}) {
   return(
-    <span className="participant-name">{participant.display}</span>
+    <span className="participant-name">{participant.display} ({participant.token})</span>
   )
 }
 
