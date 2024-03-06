@@ -4,7 +4,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { troubleBrewing as defaultScript } from '../scripts/trouble_brewing'
 import scriptParser from "../util/scriptParser"
-import { logDebug, logWarn } from "../util/logger"
 
 /*
   script = {
@@ -32,6 +31,8 @@ import { logDebug, logWarn } from "../util/logger"
     sorted: [ id, id, id ... ]
   }
 */
+
+import { logDebug, logWarn } from "../util/logger"
 const logIdent = "ScriptProvider"
 const debug = logDebug({identifier: logIdent})
 const warn = logWarn({identifier: logIdent})

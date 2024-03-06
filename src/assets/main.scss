@@ -1,13 +1,13 @@
-.townsfolk {
+.team-townsfolk {
     color: blue;
   }
-  .outsider {
+.team-outsider {
     color: lightskyblue;
   }
-  .minion {
+ .team-minion {
     color: lightcoral;
   }
-  .demon {
+ .team-demon {
     color: red;
   }
   .scriptMeta {
@@ -69,4 +69,9 @@
 
   .participant-name {
     font-style: italic;
+  }
+
+  .period-change {
+    text-decoration: none;
+    color: black;
   }

@@ -2,10 +2,9 @@
 // https://redux.js.org/usage/structuring-reducers/refactoring-reducer-example
 // https://stackoverflow.com/questions/69469855/how-to-refactor-this-reducer-following-separation-of-concerns-and-avoiding-code
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import historyLexer from "../util/commandLexer"
 
-import { logDebug } from "../util/logger"
-const debug = logDebug({identifier: "HistoryProvider"})
+// import { logDebug } from "../util/logger"
+// const debug = logDebug({identifier: "HistoryProvider"})
 
 export const actions = { append: "append", clear: "clear" }
 export const types = { error: "error", humanEntry: "humanEntry" }

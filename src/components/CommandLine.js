@@ -63,11 +63,12 @@ export default function CommandLine() {
 
   const handleCommand = (command) => {
     debug("handling command:", command)
-    const entry = commands.find((cmd) => { return cmd.id === command.operation.entry.display })
-    if( entry !== undefined ) {
-      entry.callback(command)
+    if( command !== undefined ) {
+      const entry = commands.find((cmd) => { return cmd.id === command.operation.entry.display })
+      if( entry !== undefined ) {
+        entry.callback(command)
+      }
     }
-
   }
 
   const handleSubmit = (e, historyDispatch) => {
@@ -87,7 +88,6 @@ export default function CommandLine() {
 
  
   const claim = (command) => {
-debug("claims", command)
     debug(command.left.entry.display, "claims", command.right.entry.display)
     participantsDispatch({ type: participantsActions.edit,
                            id: command.left.entry.id,
@@ -105,7 +105,7 @@ debug("claims", command)
 
 
   return( <form onSubmit={(e) => { handleSubmit(e, historyDispatch)}}>
-    <MentionsInput onChange={handleChange} singleLine={true} value={command.markup} placeholder="Kill with grace, die with dignity." >
+    <MentionsInput autoFocus onChange={handleChange} singleLine={true} value={command.markup} placeholder="Kill with grace, die with dignity." >
       <Mention
         appendSpaceOnAdd={true}
         data={autocompleteForParticipants}

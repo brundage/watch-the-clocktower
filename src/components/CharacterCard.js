@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 export function Character({character}) {
-  return(<span className={character.team}>{character.display}</span>)
+  if( character !== undefined ) {
+    const classes = `team-${character.team} character-${character.id}`
+    return(<span className={classes}>{character.display}</span>)
+  } else {
+    return null
+  }
 }
 
 

@@ -31,9 +31,6 @@ const App = () => {
       <PeriodProvider><HistoryProvider><ParticipantsProvider><ScriptProvider>
       <div className="container">
         <div className="row">
-          <PeriodPanel />
-        </div>
-        <div className="row">
           <ConfirmDialogProvider>
             <div className="col-4"><HistoryPanel formatting={formatting} /></div>
             <div className="col-4"><ParticipantsPanel /></div>
@@ -41,7 +38,10 @@ const App = () => {
           </ConfirmDialogProvider>
         </div>
         <hr />
-        <div className="row"><CommandLine /></div>
+        <div className="row">
+          <PeriodPanel />
+        </div>
+          <div className="row"><CommandLine /></div>
         <div className="row">
         </div>
       </div>

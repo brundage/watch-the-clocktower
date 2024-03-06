@@ -3,6 +3,7 @@ import { useScript, useScriptDispatch } from "./ScriptProvider"
 import JSONLoader from './JsonLoader'
 import CharacterCard from './CharacterCard'
 import { actions } from "./ScriptProvider"
+import { actions as historyActions, useHistoryDispatch } from "./HistoryProvider"
 
 // import { logDebug } from "../util/logger"
 // const debug = logDebug({identifier: "ScriptPanel"})
@@ -23,10 +24,10 @@ export default function ScriptPanel() {
     const saved = localStorage.getItem(localStorageKey);
     const initial = saved !== null ? JSON.parse(saved) : defaultShowTeams
     return initial
-  
   }
 
   const dispatch = useScriptDispatch()
+  const historyDispatch = useHistoryDispatch()
   const script = useScript()
   const [ showTeams, setShowTeams ] = useState(loadDefaultShowTeams())
 
@@ -34,6 +35,12 @@ export default function ScriptPanel() {
     useEffect(() => {
       localStorage.setItem(localStorageKey, JSON.stringify(showTeams));
     }, [showTeams]);
+  }
+
+
+  const changeScript = (scriptJSON) => {
+    dispatch({type: actions.loaded, loadedScript: scriptJSON})
+    historyDispatch({type: historyActions.clear})
   }
 
 
@@ -74,7 +81,7 @@ export default function ScriptPanel() {
       <ul>
         {script.sorted.map((id) => { return script.characters[id]}).filter(rejector).map(display)}
       </ul>
-      <JSONLoader handleRead={(data) => { dispatch({type: actions.loaded, loadedScript: data}) }} />
+      <JSONLoader handleRead={changeScript} />
       <div>{teams}</div>
     </section>
   )
