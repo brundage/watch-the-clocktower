@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useParticipants, useParticipantsDispatch, actions, roles } from './ParticipantsProvider';
 import TravellerPanel from './TravellerPanel';
 import EditableField from './EditableField';

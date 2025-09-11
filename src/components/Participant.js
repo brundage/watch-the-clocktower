@@ -16,10 +16,10 @@ const debug = logDebug({identifier: "Participant"})
   }
 */
 
-const Token = ({token}) => {
-  if( token !== undefined ) {
+const Token = ({tokenID}) => {
+  if( tokenID !== undefined ) {
     const script = useScript()
-    const character = script.characters[token]
+    const character = script.characters[tokenID]
     return( <>
       (<Character character={character} />)
        </>)
